@@ -1,4 +1,0 @@
-﻿  S1_count.cpp
-D:\work\code\C++\Study\S1_count\S1_count.cpp(9,15): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
-D:\work\code\C++\Study\S1_count\S1_count.cpp(8,23): warning C4101: “input_c”: 未引用的局部变量
-  S1_count.vcxproj -> D:\work\code\C++\Study\S1_count\x64\Debug\S1_count.exe
