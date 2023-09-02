@@ -1,0 +1,26 @@
+{
+    "SMTP": {
+        "get":{
+        "收件服务器": "imap.exmail.qq.com",
+        "使用SSL": true,
+        "端口号": 993
+        },
+        "send":{
+        "发件服务器": "smtp.exmail.qq.com",
+        "使用SSL": true,
+        "端口号": 465
+        }
+    },
+    "星火产品":{
+        "邮箱地址": "product@xinghuo.website",
+        "密码": "Rh2uQpunBGH6T9yC"
+    },
+    "server":{
+        "邮箱地址": "server@xinghuo.website",
+        "密码": "4tAEfdsTazsux2KC"
+    },
+    "星火广告":{
+        "邮箱地址": "ads@xinghuo.website",
+        "密码": "6iK8SZJJDrU84rdJ"
+    }
+}
