@@ -40,7 +40,7 @@
     </main>
     <footer>
         <p id="daily-quote">每日一言：获取中...</p>
-        <p>版权所有 &copy; 2023 我爱你.world</p>
+        <p>版权所有 &copy; 2023 我爱你.world time:<span id="current-time"></span></p>
     </footer>
 
     <script>
@@ -76,5 +76,20 @@
     </script>
 
     <script src="https://static.xinghuo.website/API/html/yiyan.js"></script>
+
+    <script>
+        // 获取时间并更新页面上的元素
+        function updateCurrentTime() {
+            const currentTimeElement = document.getElementById("current-time");
+            if (currentTimeElement) {
+                const now = new Date();
+                const formattedTime = now.toLocaleTimeString(); // 格式化为本地时间字符串
+                currentTimeElement.textContent = formattedTime;
+            }
+        }
+
+        // 每秒更新一次时间
+        setInterval(updateCurrentTime, 1000);
+    </script>
 </body>
 </html>

@@ -10,6 +10,13 @@ body, h1, h2, p, ul, li {
     src: url('https://static.xinghuo.website/API/get.php?targetUrl=https://static.xinghuo.website/ttf/Square_regular_script.ttf') format('truetype');
 }
 
+#current-time {
+    position: absolute;
+    /* left: 0; */
+    /* top: 0; 调整垂直位置，以与标题平齐 */
+    font-size: 1rem; /* 设置字体大小为相对单位1rem，保持与标题一致 */
+}
+
 body {
     font-family: "Square_regular_script",Arial, sans-serif;
     background-color: #f7f7f7;
