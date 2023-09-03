@@ -10,6 +10,8 @@
 .
 ├── HTML:HTML项目
     ├── mail:HTML邮件
+    ├── about.xinghuo.website:星火-关于网站
+    ├── www.xn--6qq986b3xl.world:www.我爱你的.world
 ├── Python:Python项目
     ├── send_ms:信息发送
         ├── info:配置信息
@@ -17,6 +19,7 @@
     ├── WatermarkCrypt:暗水印
         ├── output:输出文件
         ├── pic:输入图片
+    ├── study:课程学习文件夹
 ├── info:通用信息文件
 ```
 
