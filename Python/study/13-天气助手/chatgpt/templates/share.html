@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>分享的天气查询结果</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .label {
+            font-weight: bold;
+        }
+        .weather-info {
+            margin-bottom: 10px;
+        }
+        .weather-info span {
+            display: inline-block;
+            width: 120px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>分享的天气查询结果</h1>
+        <div class="weather-info">
+            <span>日期：</span>{{ weather_data.date }}
+        </div>
+        <div class="weather-info">
+            <span>星期：</span>{{ weather_data.week }}
+        </div>
+        <div class="weather-info">
+            <span>城市：</span>{{ weather_data.city }}
+        </div>
+        <div class="weather-info">
+            <span>天气：</span>{{ weather_data.wea }}
+        </div>
+        <div class="weather-info">
+            <span>最高温度：</span>{{ weather_data.tem1 }}°C
+        </div>
+        <div class="weather-info">
+            <span>最低温度：</span>{{ weather_data.tem2 }}°C
+        </div>
+        <div class="weather-info">
+            <span>风向：</span>{{ weather_data.win }}
+        </div>
+        <div class="weather-info">
+            <span>风力：</span>{{ weather_data.win_speed }}
+        </div>
+        <div class="weather-info">
+            <span>湿度：</span>{{ weather_data.humidity }}
+        </div>
+        <div class="weather-info">
+            <span>能见度：</span>{{ weather_data.visibility }}
+        </div>
+        <div class="weather-info">
+            <span>气压：</span>{{ weather_data.pressure }}
+        </div>
+        <div class="weather-info">
+            <span>空气质量指数：</span>{{ weather_data.air }}
+        </div>
+        <div class="weather-info">
+            <span>PM2.5：</span>{{ weather_data.air_pm25 }}
+        </div>
+        <div class="weather-info">
+            <span>空气质量等级：</span>{{ weather_data.air_level }}
+        </div>
+        <div class="weather-info">
+            <span>空气质量建议：</span>{{ weather_data.air_tips }}
+        </div>
+    </div>
+</body>
+</html>

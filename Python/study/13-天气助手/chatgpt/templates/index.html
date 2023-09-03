@@ -1,0 +1,92 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>天气查询应用</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .weather-info {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .weather-icon {
+            margin-top: 20px;
+            font-size: 60px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>天气查询应用</h1>
+        <form method="post" action="/">
+            <div class="form-group">
+                <input type="text" class="form-control" name="city" placeholder="请输入城市名称" required>
+            </div>
+            <button type="submit" class="btn btn-primary">查询</button>
+        </form>
+        {% if share_id %}
+        <div class="share">
+            <h4>分享链接：</h4>
+            <input type="text" class="form-control" value="{{ request.host_url }}share/{{ share_id }}" readonly>
+        </div>
+        {% endif %}
+        {% if weather_data %}
+        <div class="weather-info">
+            <h2>{{ weather_data.city }}</h2>
+            <p><span class="label">日期：</span>{{ weather_data.date }}</p>
+            <p><span class="label">星期：</span>{{ weather_data.week }}</p>
+            <p><span class="label">天气：</span>{{ weather_data.wea }}</p>
+            <p><span class="label">温度：</span>{{ weather_data.tem }}</p>
+            <p><span class="label">最高温度：</span>{{ weather_data.tem1 }}</p>
+            <p><span class="label">最低温度：</span>{{ weather_data.tem2 }}</p>
+            <p><span class="label">风向：</span>{{ weather_data.win }}</p>
+            <p><span class="label">风速：</span>{{ weather_data.win_speed }}</p>
+            <p><span class="label">湿度：</span>{{ weather_data.humidity }}</p>
+            <p><span class="label">能见度：</span>{{ weather_data.visibility }}</p>
+            <p><span class="label">气压：</span>{{ weather_data.pressure }}</p>
+            <p><span class="label">空气质量：</span>{{ weather_data.air }}</p>
+            <p><span class="label">PM2.5：</span>{{ weather_data.air_pm25 }}</p>
+            <p><span class="label">空气质量等级：</span>{{ weather_data.air_level }}</p>
+            <p><span class="label">空气质量提示：</span>{{ weather_data.air_tips }}</p>
+
+            <div class="weather-icon">
+                {% if weather_data.wea == "晴" %}
+                    <i class="fas fa-sun"></i>
+                {% elif weather_data.wea == "多云" %}
+                    <i class="fas fa-cloud-sun"></i>
+                {% elif weather_data.wea == "阴" %}
+                    <i class="fas fa-cloud"></i>
+                {% elif weather_data.wea == "雨" %}
+                    <i class="fas fa-cloud-showers-heavy"></i>
+                {% elif weather_data.wea == "雪" %}
+                    <i class="fas fa-snowflake"></i>
+                {% else %}
+                    <i class="fas fa-question"></i>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+</body>
+</html>

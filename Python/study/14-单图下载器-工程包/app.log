@@ -1,0 +1,19 @@
+2023-06-18 09:41:13,851 - DEBUG - Starting new HTTPS connection (1): www.httpbin.org:443
+2023-06-18 09:41:14,920 - DEBUG - https://www.httpbin.org:443 "GET /get?username=codemao&password=123456 HTTP/1.1" 200 405
+2023-06-18 09:41:14,928 - INFO - 200
+2023-06-18 09:41:14,928 - INFO - {
+  "args": {
+    "password": "123456", 
+    "username": "codemao"
+  }, 
+  "headers": {
+    "Accept": "*/*", 
+    "Accept-Encoding": "gzip, deflate", 
+    "Host": "www.httpbin.org", 
+    "User-Agent": "python-requests/2.28.1", 
+    "X-Amzn-Trace-Id": "Root=1-648e60ae-2f8d554f7e358a6e4816f2ba"
+  }, 
+  "origin": "169.150.203.10", 
+  "url": "https://www.httpbin.org/get?username=codemao&password=123456"
+}
+
