@@ -28,7 +28,7 @@
             padding: 10px;
             cursor: pointer;
         }
-        
+
         .content-left h3 {
             margin-top: 0;
             color: #333;
@@ -55,7 +55,7 @@
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <div class="content-left">
             <h2>我们的成员</h2>
@@ -81,30 +81,12 @@
             </ul>
         </div>
     </main>
-    
+
     <footer>
         <p id="daily-quote">每日一言：获取中...</p>
         <p>版权所有 &copy; 2023 星火团队</p>
     </footer>
 
-    <script>
-        // 获取每日一言内容
-        fetch('https://v.api.aa1.cn/api/yiyan/index.php')
-            .then(response => response.text())
-            .then(data => {
-                const quoteElement = document.getElementById('daily-quote');
-                quoteElement.textContent = '每日一言：' + stripHtmlTags(data);
-            })
-            .catch(error => {
-                console.error('获取每日一言失败：', error);
-            });
-
-        // 辅助函数：去除HTML标签
-        function stripHtmlTags(html) {
-            let tmp = document.createElement('DIV');
-            tmp.innerHTML = html;
-            return tmp.textContent || tmp.innerText || '';
-        }
-    </script>
+    <script src="https://static.xinghuo.website/API/html/yiyan.js"></script>
 </body>
 </html>

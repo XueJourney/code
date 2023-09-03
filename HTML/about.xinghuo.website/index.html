@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>团队介绍</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
     <style>
         /* 每日一言样式 */
         #daily-quote {
@@ -23,22 +23,22 @@
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <div class="content-left">
             <h2>团队概况</h2>
             <p>我们的团队由一群充满激情和拥有专业技能的成员组成。我们拥有多种专业知识，包括但不限于编程、编辑、视频创作等。
                 每个成员都在自己的领域内具有丰富的经验和卓越的能力，我们相信团队的多样性和协作精神是我们成功的关键。</p>
-            
+
             <h2>我们的理念</h2>
             <p>
-                创新与卓越：我们不断追求创新，致力于提供卓越的解决方案。<br> 
-                客户导向：我们始终以客户的需求和满意度为核心，为客户提供最佳的服务。<br> 
-                团队合作：我们注重团队合作和协作，相互支持和互补，共同实现团队目标。<br> 
-                诚信与透明：我们坚持诚实、透明和道德的原则，与合作伙伴和客户建立信任关系。<br> 
-                持续学习：我们鼓励团队成员不断学习和提升自我，保持行业领先的专业知识和技能。<br> 
+                创新与卓越：我们不断追求创新，致力于提供卓越的解决方案。<br>
+                客户导向：我们始终以客户的需求和满意度为核心，为客户提供最佳的服务。<br>
+                团队合作：我们注重团队合作和协作，相互支持和互补，共同实现团队目标。<br>
+                诚信与透明：我们坚持诚实、透明和道德的原则，与合作伙伴和客户建立信任关系。<br>
+                持续学习：我们鼓励团队成员不断学习和提升自我，保持行业领先的专业知识和技能。<br>
             </p>
-            
+
             <h2>我们的产品</h2>
             <ul>
                 <li>星火资源站</li>
@@ -47,31 +47,12 @@
             </ul>
         </div>
     </main>
-    
+
     <footer>
         <p id="daily-quote">每日一言：获取中...</p>
         <p>版权所有 &copy; 2023 星火团队</p>
     </footer>
 
-    <script>
-        // 获取每日一言内容
-        fetch('https://v.api.aa1.cn/api/yiyan/index.php')
-            .then(response => response.text())
-            .then(data => {
-                const quoteElement = document.getElementById('daily-quote');
-                quoteElement.textContent = '每日一言：' + stripHtmlTags(data);
-            })
-            .catch(error => {
-                console.error('获取每日一言失败：', error);
-            });
-
-        // 辅助函数：去除HTML标签
-        function stripHtmlTags(html) {
-            let tmp = document.createElement('DIV');
-            tmp.innerHTML = html;
-            return tmp.textContent || tmp.innerText || '';
-        }
-    </script>
-
+    <script src="https://static.xinghuo.website/API/html/yiyan.js"></script>
 </body>
 </html>

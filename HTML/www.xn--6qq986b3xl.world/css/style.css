@@ -6,8 +6,8 @@ body, h1, h2, p, ul, li {
 
 /* Global Styles */
 @font-face {
-  font-family: 'Square_regular_script';
-  src: url('/ttf/Square_regular_script.ttf') format('truetype');
+    font-family: 'Square_regular_script';
+    src: url('https://static.xinghuo.website/API/get.php?targetUrl=https://static.xinghuo.website/ttf/Square_regular_script.ttf') format('truetype');
 }
 
 body {

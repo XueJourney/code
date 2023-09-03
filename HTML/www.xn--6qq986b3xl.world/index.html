@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>域名正在出售!</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
 
     </style>
@@ -22,7 +24,7 @@
             <button id="loadMusicButton" onclick="handleLoadMusicClick()">加载音乐播放器</button>
         </nav>
     </header>
-    
+
     <main>
         <div class="content-left">
             <h2>介绍</h2>
@@ -40,10 +42,22 @@
         <p id="daily-quote">每日一言：获取中...</p>
         <p>版权所有 &copy; 2023 我爱你.world</p>
     </footer>
-    
+
     <script>
         // 创建按钮点击事件处理函数
         function handleLoadMusicClick() {
+            // 创建一个数组，包含多个音乐播放器的网址
+            const musicPlayerUrls = [
+                "https://music.163.com/outchain/player?type=2&id=2066608949&auto=1&height=32",//下个路口见
+                "https://music.163.com/outchain/player?type=2&id=2031184412&auto=1&height=32",//我曾爱过一个人
+                "https://music.163.com/outchain/player?type=2&id=1297802566&auto=1&height=32",//十年人间
+                // 添加更多音乐播放器的网址
+            ];
+
+            // 从数组中随机选择一个网址
+            const randomIndex = Math.floor(Math.random() * musicPlayerUrls.length);
+            const selectedUrl = musicPlayerUrls[randomIndex];
+
             const iframe = document.createElement('iframe');
             iframe.frameBorder = "no";
             iframe.border = "0";
@@ -51,35 +65,16 @@
             iframe.marginheight = "0";
             iframe.width = 298;
             iframe.height = 52;
-            iframe.src = "https://music.163.com/outchain/player?type=2&id=2066608949&auto=1&height=32";
+            iframe.src = selectedUrl; // 将随机选择的网址赋给iframe的src属性
 
             const nav = document.querySelector('nav'); // 选择一个合适的位置插入
             nav.appendChild(iframe);
-            
+
             // 隐藏按钮
             document.getElementById('loadMusicButton').style.display = 'none';
         }
     </script>
-    
-    <script>
-        // 获取每日一言内容
-        fetch('https://v.api.aa1.cn/api/yiyan/index.php')
-            .then(response => response.text())
-            .then(data => {
-                const quoteElement = document.getElementById('daily-quote');
-                quoteElement.textContent = '每日一言：' + stripHtmlTags(data);
-            })
-            .catch(error => {
-                console.error('获取每日一言失败：', error);
-            });
 
-        // 辅助函数：去除HTML标签
-        function stripHtmlTags(html) {
-            let tmp = document.createElement('DIV');
-            tmp.innerHTML = html;
-            return tmp.textContent || tmp.innerText || '';
-        }
-    </script>
-
+    <script src="https://static.xinghuo.website/API/html/yiyan.js"></script>
 </body>
 </html>
