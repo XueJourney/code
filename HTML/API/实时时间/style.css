@@ -1,0 +1,6 @@
+#current-time {
+    position: absolute;
+    /* left: 0; */
+    /* top: 0; 调整垂直位置，以与标题平齐 */
+    font-size: 1rem; /* 设置字体大小为相对单位1rem，保持与标题一致 */
+}

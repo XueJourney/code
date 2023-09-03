@@ -10,6 +10,19 @@ body, h1, h2, p, ul, li {
     src: url('https://static.xinghuo.website/API/get.php?targetUrl=https://static.xinghuo.website/ttf/Square_regular_script.ttf') format('truetype');
 }
 
+/* 文字渐变效果 */
+.text-gradient {
+    background-image: linear-gradient(to right, orange, purple);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 30px;
+}
+
+/* 模糊文字 */
+.blur_text {
+    filter: blur(1px);
+}
+
 #current-time {
     position: absolute;
     /* left: 0; */

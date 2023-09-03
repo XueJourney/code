@@ -6,17 +6,13 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style>
-
-    </style>
 </head>
 <body>
     <header>
-        <h1>我爱你.world</h1>
+        <h1 class="text-gradient">我爱你.world</h1>
         <nav>
             <ul>
-                <li><a href="/" class="menu-button">主页</a></li>
+                <li><a href="index.html" class="menu-button">主页</a></li>
                 <li><a href="ownership.html" class="menu-button">域名所有</a></li>
                 <li><a href="https://about.xinghuo.website/" class="menu-button">管理团队</a></li>
             </ul>
@@ -43,53 +39,8 @@
         <p>版权所有 &copy; 2023 我爱你.world time:<span id="current-time"></span></p>
     </footer>
 
-    <script>
-        // 创建按钮点击事件处理函数
-        function handleLoadMusicClick() {
-            // 创建一个数组，包含多个音乐播放器的网址
-            const musicPlayerUrls = [
-                "https://music.163.com/outchain/player?type=2&id=2066608949&auto=1&height=32",//下个路口见
-                "https://music.163.com/outchain/player?type=2&id=2031184412&auto=1&height=32",//我曾爱过一个人
-                "https://music.163.com/outchain/player?type=2&id=1297802566&auto=1&height=32",//十年人间
-                // 添加更多音乐播放器的网址
-            ];
-
-            // 从数组中随机选择一个网址
-            const randomIndex = Math.floor(Math.random() * musicPlayerUrls.length);
-            const selectedUrl = musicPlayerUrls[randomIndex];
-
-            const iframe = document.createElement('iframe');
-            iframe.frameBorder = "no";
-            iframe.border = "0";
-            iframe.marginwidth = "0";
-            iframe.marginheight = "0";
-            iframe.width = 298;
-            iframe.height = 52;
-            iframe.src = selectedUrl; // 将随机选择的网址赋给iframe的src属性
-
-            const nav = document.querySelector('nav'); // 选择一个合适的位置插入
-            nav.appendChild(iframe);
-
-            // 隐藏按钮
-            document.getElementById('loadMusicButton').style.display = 'none';
-        }
-    </script>
-
+    <script src="js/music.js"></script>
     <script src="https://static.xinghuo.website/API/html/yiyan.js"></script>
-
-    <script>
-        // 获取时间并更新页面上的元素
-        function updateCurrentTime() {
-            const currentTimeElement = document.getElementById("current-time");
-            if (currentTimeElement) {
-                const now = new Date();
-                const formattedTime = now.toLocaleTimeString(); // 格式化为本地时间字符串
-                currentTimeElement.textContent = formattedTime;
-            }
-        }
-
-        // 每秒更新一次时间
-        setInterval(updateCurrentTime, 1000);
-    </script>
+    <script src="https://static.xinghuo.website/API/html/nowtime.js"></script>
 </body>
 </html>

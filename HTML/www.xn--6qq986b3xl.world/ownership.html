@@ -4,24 +4,19 @@
     <meta charset="UTF-8">
     <title>域名所有权</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        /* 每日一言样式 */
-        #daily-quote {
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <header>
         <h1>我爱你.world</h1>
         <nav>
             <ul>
-                <li><a href="/" class="menu-button">主页</a></li>
+                <li><a href="index.html" class="menu-button">主页</a></li>
                 <li><a href="ownership.html" class="menu-button">域名所有</a></li>
                 <li><a href="https://about.xinghuo.website/" class="menu-button">管理团队</a></li>
             </ul>
+            <button id="loadMusicButton" onclick="handleLoadMusicClick()">加载音乐播放器</button>
         </nav>
     </header>
 
@@ -40,9 +35,11 @@
 
     <footer>
         <p id="daily-quote">每日一言：获取中...</p>
-        <p>版权所有 &copy; 2023 我爱你.world</p>
+        <p>版权所有 &copy; 2023 我爱你.world time:<span id="current-time"></span></p>
     </footer>
 
+    <script src="js/music.js"></script>
     <script src="https://static.xinghuo.website/API/html/yiyan.js"></script>
+    <script src="https://static.xinghuo.website/API/html/nowtime.js"></script>
 </body>
 </html>
