@@ -4,7 +4,6 @@ print("导入库")
 import urllib
 import urllib.request
 import hashlib
-import json
 import requests
 # 导入邮件模块
 import smtplib
@@ -20,7 +19,7 @@ def md5(str):
     m = hashlib.md5()
     m.update(str.encode("utf8"))
     return m.hexdigest()
- 
+
 statusStr = {
     '0': '短信发送成功',
     '-1': '参数不全',
@@ -32,7 +31,7 @@ statusStr = {
     '43': 'IP地址限制',
     '50': '内容含有敏感词'
 }
- 
+
 smsapi = "http://api.smsbao.com/"
 print("短信宝API配置完成")
 
@@ -99,7 +98,6 @@ class mail():
     def send_mail(self, mail_to,  content, Subject,user_name, send_user):
         """
         发送一封电子邮件。
-        
         参数:
         mail_to (str)：收件人的电子邮件地址。
         content (str)：邮件的内容。
@@ -135,7 +133,7 @@ class mail():
             print("邮件发送成功！")
         except Exception as e:
             print("邮件发送失败：", str(e))
-    
+
 def main():
     mode = input("请选择您本次发送信息的类型(SMS/mail):")
     if mode == "mail":
