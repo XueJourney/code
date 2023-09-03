@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>胡涵恋的详细信息</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        /* 超链接样式 */
+        .menu-button {
+            display: inline-block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            background-color: #333;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #666;
+        }
+        /* 成员详细信息样式 */
+        .member-details {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        
+        .member-details h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .member-details p {
+            color: #666;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .member-details {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        /* 每日一言样式 */
+        #daily-quote {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        /* 底部信息认证 */
+       .clickable {
+         color: red;
+         cursor: pointer;
+       }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>星火团队</h1>
+        <nav>
+            <ul>
+                <li><a href="../../index.html" class="menu-button">主页</a></li>
+                <li><a href="../index.html" class="menu-button">团队介绍</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="member-details">
+            <h2>胡涵恋</h2>
+            <br>
+            <p>职位：财务</p>
+            <p>兴趣：绘画钢琴</p>
+            <p>优点：细心，比较在意他人感受，救场能力强，上过深圳教育局官网，</p>
+            <p>&#12288;小学初中担任过很多班干部，自我感觉良好，成绩有进步空间</p>
+            <p>缺点：没有耐心，选择困难症，喜欢开玩笑上知天文下知地理，嘴比脑子快</p>
+            <br>
+            <p>座右铭：好事会发生在下一个转弯</p>
+        </div>
+    </main>
+    
+    <footer>
+        <p title="信息为成员本人填写，无法判断真实性，请注意辨别" id="text" onclick="showExplanation()" class="clickable"><s><i><b>已进行认证，内容属实</b></i></s></p>
+        <!--<p><i><b>信息为成员本人填写，无法判断真实性，请注意辨别</b></i></p>-->
+        <p id="daily-quote">每日一言：获取中...</p>
+        <p>版权所有 &copy; 2023 星火团队</p>
+    </footer>
+    
+    <script>
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  
+  function showExplanation() {
+    if (isMobile) {
+      // 在手机上显示解释
+      alert("信息为成员本人填写，无法判断真实性，请注意辨别");
+    } else {
+      // 在电脑上显示解释
+      // 这里可以使用类似于鼠标悬停的提示信息，如使用title属性或者自定义弹出框等
+      // 例如：document.getElementById("text").title = "这是解释的内容";
+    //   document.getElementById("text").title = "信息为成员本人填写，无法判断真实性，请注意辨别";
+    }
+  }
+</script>
+    
+    <script>
+        // 获取每日一言内容
+        fetch('https://v.api.aa1.cn/api/yiyan/index.php')
+            .then(response => response.text())
+            .then(data => {
+                const quoteElement = document.getElementById('daily-quote');
+                quoteElement.textContent = '每日一言：' + stripHtmlTags(data);
+            })
+            .catch(error => {
+                console.error('获取每日一言失败：', error);
+            });
+
+        // 辅助函数：去除HTML标签
+        function stripHtmlTags(html) {
+            let tmp = document.createElement('DIV');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
+    </script>
+</body>
+</html>

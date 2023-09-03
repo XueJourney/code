@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>域名正在出售!</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>我爱你.world</h1>
+        <nav>
+            <ul>
+                <li><a href="/" class="menu-button">主页</a></li>
+                <li><a href="ownership.html" class="menu-button">域名所有</a></li>
+                <li><a href="https://about.xinghuo.website/" class="menu-button">管理团队</a></li>
+            </ul>
+            <!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2066608949&auto=1&height=66"></iframe>-->
+            <button id="loadMusicButton" onclick="handleLoadMusicClick()">加载音乐播放器</button>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="content-left">
+            <h2>介绍</h2>
+            <p>我爱你.world,一个独属于中国程序员的浪漫</p>
+            <br>
+            <h2>产品介绍</h2>
+            <p>我爱你.world的三级域名正在出售，购买后你将享有你购买的三级域名和三级域名后四五级域名的使用权,整体效果为"XXX.我爱你.world"。如果您不会搭建网站,可以选择菜单键中的"域名所有"来联系 网站/域名 的管理员,你的域名购买以后,我们将赠送您一次网站搭建</p>
+            <br>
+            <h2>售价</h2>
+            <h3>分短期长期</h3>
+            <P>价格面议,通过"域名所有"中的联系方式联系</P>
+        </div>
+    </main>
+    <footer>
+        <p id="daily-quote">每日一言：获取中...</p>
+        <p>版权所有 &copy; 2023 我爱你.world</p>
+    </footer>
+    
+    <script>
+        // 创建按钮点击事件处理函数
+        function handleLoadMusicClick() {
+            const iframe = document.createElement('iframe');
+            iframe.frameBorder = "no";
+            iframe.border = "0";
+            iframe.marginwidth = "0";
+            iframe.marginheight = "0";
+            iframe.width = 298;
+            iframe.height = 52;
+            iframe.src = "https://music.163.com/outchain/player?type=2&id=2066608949&auto=1&height=32";
+
+            const nav = document.querySelector('nav'); // 选择一个合适的位置插入
+            nav.appendChild(iframe);
+            
+            // 隐藏按钮
+            document.getElementById('loadMusicButton').style.display = 'none';
+        }
+    </script>
+    
+    <script>
+        // 获取每日一言内容
+        fetch('https://v.api.aa1.cn/api/yiyan/index.php')
+            .then(response => response.text())
+            .then(data => {
+                const quoteElement = document.getElementById('daily-quote');
+                quoteElement.textContent = '每日一言：' + stripHtmlTags(data);
+            })
+            .catch(error => {
+                console.error('获取每日一言失败：', error);
+            });
+
+        // 辅助函数：去除HTML标签
+        function stripHtmlTags(html) {
+            let tmp = document.createElement('DIV');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
+    </script>
+
+</body>
+</html>

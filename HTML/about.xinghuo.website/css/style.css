@@ -1,0 +1,92 @@
+/* Reset CSS */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Global Styles */
+@font-face {
+  font-family: 'Square_regular_script';
+  src: url('/ttf/Square_regular_script.ttf') format('truetype');
+}
+
+body {
+    font-family: "Square_regular_script",Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 1.5;
+}
+
+header {
+    background-color: #333;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+main .content-left {
+    background-color: #fff;
+}
+
+main h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+footer {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#daily-quote {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.menu-button {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 12px;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+
+.menu-button.hovered {
+    background-color: #555;
+}

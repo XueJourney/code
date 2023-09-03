@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>薛中泽的详细信息</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        /* 超链接样式 */
+        .menu-button {
+            display: inline-block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            background-color: #333;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #666;
+        }
+        /* 成员详细信息样式 */
+        .member-details {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        
+        .member-details h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .member-details p {
+            color: #666;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .member-details {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        /* 每日一言样式 */
+        #daily-quote {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        /* 底部信息认证 */
+       .clickable {
+         color: blue;
+         cursor: pointer;
+       }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>星火团队</h1>
+        <nav>
+            <ul>
+                <li><a href="../../index.html" class="menu-button">主页</a></li>
+                <li><a href="../index.html" class="menu-button">团队介绍</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="member-details">
+            <h2>薛中泽</h2>
+            <p>职位：法人/客服/技术/编辑</p>
+            <p>领导经验：</p>
+            <p>&#12288;责任心强，遇到突发状况沉着冷静</p>
+            <p>&#12288;带领过多个团队克服困难，完成任务</p>
+            <p>&#12288;不断战胜自己，让自己走向巅峰，让团队走向辉煌</p>
+            <p>开发经历：</p>
+            <p>&#12288;熟悉python,php,html,css。仅一人开发了多个开源项目</p>
+            <p>&#12288;多次参与公益活动，人生格言是“让红色照耀每一个角落”</p>
+            <p>&#12288;旗下网站最高每日访问量为10W，IP>1W</p>
+            <p>写作经历：CSDN写过文章>100，浏览量>1K/天</p>
+            <p>沟通经验:</p>
+            <p>&#12288;法人:与服务商沟通次数>50</p>
+            <p>&#12288;客服:接待过用户>200，时长>180m</p>
+            <br>
+            <p>座右铭：虚心竹有低头叶傲骨梅无仰面枝。</p>
+        </div>
+    </main>
+    
+    <footer>
+        <p class="clickable"><i><b>已进行认证，内容属实</b></i></p>
+        <p id="daily-quote">每日一言：获取中...</p>
+        <p>版权所有 &copy; 2023 星火团队</p>
+    </footer>
+    
+    <script>
+        // 获取每日一言内容
+        fetch('https://v.api.aa1.cn/api/yiyan/index.php')
+            .then(response => response.text())
+            .then(data => {
+                const quoteElement = document.getElementById('daily-quote');
+                quoteElement.textContent = '每日一言：' + stripHtmlTags(data);
+            })
+            .catch(error => {
+                console.error('获取每日一言失败：', error);
+            });
+
+        // 辅助函数：去除HTML标签
+        function stripHtmlTags(html) {
+            let tmp = document.createElement('DIV');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
+    </script>
+</body>
+</html>

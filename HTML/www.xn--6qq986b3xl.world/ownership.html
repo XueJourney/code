@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>域名所有权</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* 每日一言样式 */
+        #daily-quote {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>我爱你.world</h1>
+        <nav>
+            <ul>
+                <li><a href="/" class="menu-button">主页</a></li>
+                <li><a href="ownership.html" class="menu-button">域名所有</a></li>
+                <li><a href="https://about.xinghuo.website/" class="menu-button">管理团队</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="content-left">
+            <h2>联系方式</h2>
+            <P><b>姓名：</b><i>MrXue</i></P>
+            <P><B>微信：</B><I>xzz_lionleo20</I></P>
+            <P><B>QQ：</B><I>2432287445</I></P>
+            <P><B>邮箱</B><I>admin@xinghuo.website</I></P>
+            <P><B>推特(twitter)：</B><I>待补充...</I></P>
+            <P><B>脸书(facebook)：</B><I>待补充...</I></P>
+            <P><B>电报(telegram)：</B><I>待补充...</I></P>
+        </div>
+    </main>
+    
+    <footer>
+        <p id="daily-quote">每日一言：获取中...</p>
+        <p>版权所有 &copy; 2023 我爱你.world</p>
+    </footer>
+
+    <script>
+        // 获取每日一言内容
+        fetch('https://v.api.aa1.cn/api/yiyan/index.php')
+            .then(response => response.text())
+            .then(data => {
+                const quoteElement = document.getElementById('daily-quote');
+                quoteElement.textContent = '每日一言：' + stripHtmlTags(data);
+            })
+            .catch(error => {
+                console.error('获取每日一言失败：', error);
+            });
+
+        // 辅助函数：去除HTML标签
+        function stripHtmlTags(html) {
+            let tmp = document.createElement('DIV');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
+    </script>
+
+</body>
+</html>

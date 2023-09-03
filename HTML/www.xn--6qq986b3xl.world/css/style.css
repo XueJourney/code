@@ -1,0 +1,101 @@
+/* Reset CSS */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Global Styles */
+@font-face {
+  font-family: 'Square_regular_script';
+  src: url('/ttf/Square_regular_script.ttf') format('truetype');
+}
+
+body {
+    font-family: "Square_regular_script",Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 1.5;
+    /*背景*/
+    background-image: url('https://static.xinghuo.website/wallpaper/programmer/v2-87753ec8664dc53f0f905e6f9519e7c6_720w.webp'); /* 背景图片的文件路径 */
+    background-size: cover; /* 让背景图片铺满整个页面 */
+    background-repeat: no-repeat; /* 防止背景图片重复出现 */
+    background-attachment: fixed; /* 让背景图片固定在屏幕上 */
+}
+
+header {
+    background-color: #333;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    /* 背景色(白色) */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /*20230821*/
+    /* 移除背景色 */
+    /*background-color: transparent*/
+}
+
+main .content-left {
+    background-color: #fff;
+}
+
+main h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+footer {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#daily-quote {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.menu-button {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 12px;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+
+.menu-button.hovered {
+    background-color: #555;
+}
