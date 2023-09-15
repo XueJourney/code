@@ -5,3 +5,5 @@ build/
 # 去除C++代码文件
 /C++
 /.vs
+# 去除vscode配置文件
+*.code-workspace
