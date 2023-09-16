@@ -6,27 +6,28 @@ $rootDirectory = $_SERVER['DOCUMENT_ROOT'];
 $sitemapLinks = [];
 
 // 递归函数，用于遍历目录和子目录下的文件
-function generateSitemapLinks($directory) {
+function generateSitemapLinks($directory, $relativePath = '') {
     global $sitemapLinks;
-    $excludedFiles = ['404.html']; // 要排除的文件名列表
+    $excludedFiles = ['404.html','Website_Map.php']; // 要排除的文件名列表
     
     $files = scandir($directory);
     
     foreach ($files as $file) {
-        if ($file == '.s' || $file == '..') {
+        if ($file == '.' || $file == '..') {
             continue;
         }
         
         $filePath = $directory . '/' . $file;
+        $fileRelativePath = $relativePath . '/' . $file;
         
         // 检查文件是否以.html或.php结尾，且不在排除列表中
         if (is_file($filePath) && (pathinfo($file, PATHINFO_EXTENSION) == 'html' || pathinfo($file, PATHINFO_EXTENSION) == 'php') && !in_array($file, $excludedFiles)) {
             // 构建链接
-            $url = 'https://www.xn--6qq986b3xl.world' . str_replace($GLOBALS['rootDirectory'], '', $filePath); // 移除多余的斜杠
+            $url = 'https://www.windows12.top' . $fileRelativePath;
             $sitemapLinks[] = $url;
         } elseif (is_dir($filePath)) {
             // 如果是目录，继续递归
-            generateSitemapLinks($filePath);
+            generateSitemapLinks($filePath, $fileRelativePath);
         }
     }
 }
