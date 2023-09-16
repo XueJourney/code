@@ -7,3 +7,5 @@ build/
 /.vs
 # 去除vscode配置文件
 *.code-workspace
+# 去除github文件
+.github/
