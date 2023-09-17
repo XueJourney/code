@@ -33,11 +33,35 @@ def cut_pic_w():
     y2 = Text(w1, width=7, height=1)
     y2.pack()
     c1.create_window(220, 130, window=y2)
+    # 创建按钮
+    b = Button(w1, text='确定', command=cut_pic)
+    b.pack()
+    # 将按钮放置到画布上
+    c1.create_window(320, 170, window=b)
+    # 显示窗口
+    w1.mainloop()
 
 
 #请在下方函数中输入代码
 def cut_pic():
     '''图片裁剪函数'''
+    # 获取图片名字
+    # print(name.get(1.0, END))
+    n = str(name.get(1.0, END)).strip()
+    # 获取坐标
+    x_start = int(x1.get(1.0, END))
+    y_start = int(y1.get(1.0, END))
+    x_end = int(x2.get(1.0, END))
+    y_end = int(y2.get(1.0, END))
+    # 打开图片
+    img = Image.open(n)
+    # 裁剪图片
+    img = img.crop((x_start, y_start, x_end, y_end))
+    # 保存图片
+    name = n.split("/")
+    img.save(name[0:len(name)-1]+'cut_' + name[len(name)-1])
+    print('图片裁剪成功')
+
 
 
 #图片处理工厂主界面
