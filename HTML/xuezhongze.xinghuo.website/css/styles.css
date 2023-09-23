@@ -1,95 +1,42 @@
-/* 重置默认样式 */
+/* 全局美化代码 */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    position: relative; /* 相对定位，用于蒙版定位 */
+    background-image: url("https://static.xinghuo.website/wallpaper/programmer/v2-87753ec8664dc53f0f905e6f9519e7c6_720w.webp");
+    background-size: cover; /* 让背景图片铺满整个页面 */
+    background-attachment: fixed; /* 让背景图一直跟随页面 */
+    background-repeat: no-repeat; /* 设置背景图片不重复 */
+    background-position: center; /* 设置背景图片的位置 */
+    font-family: url("https://static.xinghuo.website/API/get.php?targetUrl=https://static.xinghuo.website/ttf/Square_regular_script.ttf");
+    /* 其他样式和属性根据需要添加 */
 }
 
-/* 更新标题样式为渐变彩色文字 */
-header {
-    background-color: #3e4e50; /* 更改主题颜色 */
-    text-align: center;
-    padding: 1rem 0;
-    background-image: linear-gradient(45deg, #ff6b6b, #ffa07a); /* 添加渐变背景 */
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-}
-
-main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-
-section {
-    margin-bottom: 20px;
-}
-
-/* 更新关于我区域的样式 */
-.about-me {
-    animation: fadeIn 1s ease-in-out;
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* 更改主题颜色 */
-h2 {
-    color: #ff6b6b; /* 更改标题颜色 */
-}
-
-/* 添加动画效果 */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-/* 添加按钮样式 */
-button {
-    background-color: #ff6b6b;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #ffa07a;
-}
-
-/* 蒙版样式 */
-.overlay {
+/* 文字居中代码 */
+.centered {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 设置蒙版颜色和透明度 */
-    z-index: 1; /* 设置堆叠顺序，使其在内容之下 */
-    pointer-events: none; /* 允许鼠标事件穿透蒙版 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-/* 媒体查询：屏幕宽度小于某个阈值时调整版权栏位置 */
-@media (max-width: 768px) {
-    #footer {
-        position: relative; /* 将版权栏位置调整到内容下方 */
-        margin-top: 20px; /* 添加一些上边距以分隔内容和版权栏 */
+/* 渐变文字颜色代码 */
+@keyframes colorChange {
+    0% {
+        color: #FF6B6B;
+    }
+    30% {
+        color: #FFB88C;
+    }
+    50% {
+        color: #FFE66D;
+    }
+    80% {
+        color: #96ff6d;
+    }
+    100%{
+        color: #6dffec;
     }
 }
+
+.live-color-change {
+    animation: colorChange 5s linear infinite alternate; /* 持续时间和效果可以根据需要调整 */
+}
+

@@ -1,13 +1,29 @@
-// JavaScript代码用于监听页面滚动事件，根据内容高度决定是否取消固定版权栏
-window.addEventListener("scroll", function() {
-    var footer = document.getElementById("footer");
-    if (footer) {
-        var contentHeight = document.body.clientHeight;
-        var windowHeight = window.innerHeight;
-        if (contentHeight > windowHeight) {
-            footer.classList.remove("scroll"); // 取消固定
-        } else {
-            footer.classList.add("scroll"); // 固定
+// JavaScript代码放在这里
+const textContainer = document.getElementById('text-container');
+const textLines = textContainer.querySelectorAll('p');
+const animationDuration = 500; // 1秒
+const delayBetweenLines = 500; // 1秒
+let delay = 0;
+
+textLines.forEach((line) => {
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `
+        @keyframes lineFadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
         }
-    }
+        .line-fade-in p {
+            opacity: 0;
+            animation: lineFadeIn ${animationDuration}ms ease-in-out forwards;
+        }
+    `;
+
+    document.head.appendChild(styleElement);
+
+    line.style.animationDelay = `${delay}ms`;
+    delay += animationDuration + delayBetweenLines;
 });
