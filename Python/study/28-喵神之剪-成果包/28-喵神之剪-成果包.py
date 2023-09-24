@@ -1,16 +1,59 @@
 '''图片加工工厂'''
-#this
+
 # 导入tkinter库
 from tkinter import *
-from PIL import Image
-from random import randint, choice
-#请在下方函数中输入代码
-def fil_pic_w():
-    '''素描滤镜窗口'''
+from PIL import Image 
 
-#请在下方函数中输入代码
-def fil_pic():
-    '''素描滤镜函数'''
+def cut_pic_w():
+    '''图片裁剪窗口'''
+    # 创建裁剪窗口
+    w1 = Tk()
+    # 设置窗口的名字和大小
+    w1.title('图片裁剪')
+    w1.geometry('400x200')
+    # 创建窗口背景画布
+    c1 = Canvas(w1, width=400, height=200, background='deepskyblue')
+    c1.pack()
+    # 创建文本输入框，获取裁剪信息
+    global name, x1, y1, x2, y2
+    # 文件名name
+    name = Text(w1, width=30, height=1)
+    name.pack()
+    c1.create_window(200, 60, window=name)
+    # 左上方横坐标
+    x1 = Text(w1, width=7, height=1)
+    x1.pack()
+    c1.create_window(119, 100, window=x1)
+    # 左上方纵坐标
+    y1 = Text(w1, width=7, height=1)
+    y1.pack()
+    c1.create_window(220, 100, window=y1)
+    # 右下方横坐标
+    x2 = Text(w1, width=7, height=1)
+    x2.pack()
+    c1.create_window(119, 130, window=x2)
+    # 右下方纵坐标
+    y2 = Text(w1, width=7, height=1)
+    y2.pack()
+    c1.create_window(220, 130, window=y2)
+    # 创建裁剪按钮
+    b1 = Button(w1,text='裁剪',command=cut_pic)
+    b1.pack()
+    c1.create_window(320, 170, window=b1)
+    # 刷新裁剪窗口
+    w1.mainloop()
+
+def cut_pic():
+    '''图片裁剪函数'''
+    n = str(name.get(1.0, END)).strip()
+    x_s = int(x1.get(1.0, END))
+    y_s = int(y1.get(1.0, END))
+    x_e = int(x2.get(1.0, END))
+    y_e = int(y2.get(1.0, END))
+    im = Image.open(n)
+    im = im.crop((x_s, y_s, x_e, y_e))
+    im.save(n[:-4]+' 副本' + n[-4:])
+    print('裁剪完成')
 
 if __name__ == '__main__':
     # 创建主窗口
@@ -31,7 +74,7 @@ if __name__ == '__main__':
         bg='deepskyblue', # 按钮背景颜色
         fg='white', # 文本颜色
         font=('微软雅黑', 15), # 文本字体和大小
-        # command=cut_pic_w # 按下时运行的函数
+        command=cut_pic_w # 按下时运行的函数
         )
     b1.pack()
     c.create_window(300, 200, window=b1)
@@ -44,7 +87,7 @@ if __name__ == '__main__':
         bg='tomato',
         fg='white',
         font=('微软雅黑', 15),
-        command=fil_pic_w # 按下时运行的函数
+        # command=fil_pic_w # 按下时运行的函数
         )
     b2.pack()
     c.create_window(120, 200, window=b2)
@@ -57,7 +100,7 @@ if __name__ == '__main__':
         bg='gold',
         fg='white',
         font=('微软雅黑', 15),
-        # command=code_maker_w 按下时运行的函数
+        # command=code_maker_w
         )
     b3.pack()
     c.create_window(480, 200, window=b3)
@@ -66,5 +109,5 @@ if __name__ == '__main__':
     c.create_text(115, 300, text='· 素描滤镜', fill='white', font=('微软雅黑', 9))
     c.create_text(295, 300, text='· 图片裁剪', fill='white', font=('微软雅黑', 9))
     c.create_text(480, 300, text='· 随机字母', fill='white', font=('微软雅黑', 9))
-    # 开启窗口主循环
+    # 刷新主窗口
     w.mainloop()
