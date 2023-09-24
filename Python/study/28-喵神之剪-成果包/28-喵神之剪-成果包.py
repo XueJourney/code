@@ -2,7 +2,21 @@
 
 # 导入tkinter库
 from tkinter import *
-from PIL import Image 
+from PIL import Image
+
+# 素描效果
+def sumiao():
+    w2 = Tk()
+    w2.title("图片素描效果")
+    w2.geometry('400x200')
+    # 创建画布
+    c2 = Canvas(w2, width=400, height=200)
+    c2.pack()
+    # 创建文本输入框，获取图片名称、滤镜系数
+    global name, i
+    name2 = Text(w2, width=30, height=1)
+    name2.pack()
+
 
 def cut_pic_w():
     '''图片裁剪窗口'''
