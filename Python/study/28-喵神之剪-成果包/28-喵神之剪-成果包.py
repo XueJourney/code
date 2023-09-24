@@ -13,9 +13,33 @@ def sumiao():
     c2 = Canvas(w2, width=400, height=200)
     c2.pack()
     # 创建文本输入框，获取图片名称、滤镜系数
-    global name, i
+    global name2, i
     name2 = Text(w2, width=30, height=1)
     name2.pack()
+    # 将组建添加至画布
+    c2.create_window(200, 60, window=name2)
+
+    i = Text(w2, width=30, height=1)
+    i.pack()
+    c2.create_window(130, 100, window=i)
+    # 创建按钮绑定函数fil_pic
+    b2 = Button(w2, text="生成", command=fil_pic)
+    b2.pack()
+    c2.create_window(250, 120, window=b2)
+    w2.mainloop()
+
+# 定义处理素描效果函数
+def fil_pic():
+    # 获取输入框内容
+    global name, i
+    name = name2.get("1.0", "end-1c")
+    i = i.get("1.0", "end-1c")
+    # 获取图片
+    img = Image.open(name)
+    # 转换为灰度图
+    img = img.convert("L")
+    # 模糊处理
+    img = img.filter(ImageFilter.GaussianBlur(int(i)))
 
 
 def cut_pic_w():
@@ -101,7 +125,7 @@ if __name__ == '__main__':
         bg='tomato',
         fg='white',
         font=('微软雅黑', 15),
-        # command=fil_pic_w # 按下时运行的函数
+        command=sumiao # 按下时运行的函数
         )
     b2.pack()
     c.create_window(120, 200, window=b2)
