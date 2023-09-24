@@ -4,6 +4,62 @@
 from tkinter import *
 from PIL import Image 
 
+'''图片素描效果'''
+def sumiao():
+    w2 = Tk()
+    w2.title('图片素描效果')
+    w2.geometry('400x200')
+    # 创建窗口背景画布
+    c2 = Canvas(w2, width=400, height=200, background='tomato')
+    c2.pack()
+    # 创建文本输入框，获取图片名称、滤镜系数
+    global name2, i
+    name2 = Text(w2, width=30, height=1)
+    name2.pack()
+    #将组件添加到画布中
+    c2.create_window(200, 60, window=name2 )
+
+    i = Text(w2, width=10, height=1)
+    i.pack()
+    c2.create_window(130, 100, window=i)
+    #创建按钮，绑定函数fil_pic()
+    b2 = Button(w2, text='生成', command=fil_pic )
+    b2.pack()
+    c2.create_window(250, 120, window=b2)
+    w2.mainloop()
+#定义处理素描效果的函数
+def fil_pic():
+    #获取图片名称和滤镜系数
+    n = str(name2.get(1.0, END)).strip()
+    fil_i = int(i.get(1.0, END))
+    #打开图片
+    img2 = Image.open(n)
+    #获得图片尺寸
+    width, height = img2.size
+    #将图片色彩类型转成灰度，并创建处理图片像素点的对象
+    img2 = img2.convert('L')
+    img2_L = img2.load()
+    #处理像素点
+    for w in range(width):
+        for h in range(height):
+            #判断是否为图片右边缘或底边缘，是则排除，跳过此次循环
+            if ( w == width - 1 )  or ( h == height - 1) :
+                continue
+            #获取当前像素点和右下角像素点p1和p2
+            p1 = img2_L[w,h]
+            p2 = img2_L[w+1, h+1]
+            #计算两个像素点差值的绝对值p_abs
+            p_abs = abs(p1 - p2)
+            #如果差值大于等于滤镜系数，当前像素点为轮廓点，变黑;否则变白
+            if p_abs >= fil_i:
+                img2_L[w,h] = 0
+            else:
+                img2_L[w,h] = 255
+            #保存为新图片
+    img2.save('sumiao_' + n)
+    print('素描处理完成')
+
+
 def cut_pic_w():
     '''图片裁剪窗口'''
     # 创建裁剪窗口
@@ -87,7 +143,7 @@ if __name__ == '__main__':
         bg='tomato',
         fg='white',
         font=('微软雅黑', 15),
-        # command=fil_pic_w # 按下时运行的函数
+        command=sumiao # 按下时运行的函数
         )
     b2.pack()
     c.create_window(120, 200, window=b2)
