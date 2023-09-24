@@ -11,10 +11,24 @@ body {
 
 /* 文字居中代码 */
 .centered {
+    position: relative; /* 将元素的定位改为相对定位 */
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.centered::after {
+    content: "";
+    position: absolute;
+    width: calc(100% + 100px); /* 宽度比文本多20px，前后都延长20px，根据需要调整 */
+    height: calc(100% + 100px); /* 高度比文本多50px，前后都延长50px，根据需要调整 */
+    background-color: rgba(255, 255, 255, 0.5); /* 蒙版的背景颜色，可以根据需要调整 */
+    border-radius: 10px; /* 圆角的大小，根据需要调整 */
+    top: -50px; /* 将蒙版上移50px以覆盖文本上部分 */
+    left: 50%;
+    transform: translateX(-50%); /* 使蒙版水平居中 */
+    z-index: -1; /* 将蒙版放在元素的背后 */
 }
 
 /* 渐变文字颜色代码 */
