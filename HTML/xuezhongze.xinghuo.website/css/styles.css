@@ -54,3 +54,28 @@ body {
     animation: colorChange 5s linear infinite alternate; /* 持续时间和效果可以根据需要调整 */
 }
 
+/* 语言占比 */
+.circle {
+    width: 200px;
+    height: 200px;
+    background: conic-gradient(
+        #3498db 0% 40%,      /* Python 占比 40% */
+        #2ecc71 40% 60%,     /* HTML 占比 20% */
+        #e74c3c 60% 70%,     /* CSS 占比 10% */
+        #f1c40f 70% 75%,     /* JavaScript 占比 5% */
+        #9b59b6 75% 100%     /* PHP 占比 25% */
+    );
+    border-radius: 50%;
+    position: relative; /* 添加相对定位，让绝对定位生效 */
+}
+
+.language-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    z-index: 1; /* 添加z-index属性，确保标签显示在扇形图上方 */
+}
