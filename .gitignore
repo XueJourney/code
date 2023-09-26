@@ -9,3 +9,6 @@ build/
 *.code-workspace
 # 去除github文件
 .github/
+# temp文件
+/temp_o
+temp/
