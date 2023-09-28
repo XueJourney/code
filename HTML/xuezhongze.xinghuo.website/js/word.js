@@ -1,15 +1,15 @@
 // 文字逐渐显示并带有打字机效果
 // 获取包含文本的容器
 const textContainer = document.getElementById('text-container');
-const textLines = textContainer.querySelectorAll('p');
+const textElements = textContainer.querySelectorAll('p, h1, h2, h3, h4, h5, li'); // 修改选择器以包括所需的标签
 const animationDuration = 500; // 1秒
-const delayBetweenLines = 500; // 1秒
+const delayBetweenElements = 500; // 1秒
 let delay = 0;
 
-textLines.forEach((line) => {
+textElements.forEach((element) => {
     const styleElement = document.createElement('style');
     styleElement.textContent = `
-        @keyframes lineFadeIn {
+        @keyframes elementFadeIn {
             0% {
                 opacity: 0;
             }
@@ -17,27 +17,27 @@ textLines.forEach((line) => {
                 opacity: 1;
             }
         }
-        .line-fade-in p {
+        .element-fade-in {
             opacity: 0;
-            animation: lineFadeIn ${animationDuration}ms ease-in-out forwards;
+            animation: elementFadeIn ${animationDuration}ms ease-in-out forwards;
         }
     `;
 
     document.head.appendChild(styleElement);
 
     // 使用自定义的等待时间参数（传入的值或默认值）
-    const waitDuration = parseInt(line.dataset.waitDuration) || 1000;
+    const waitDuration = parseInt(element.dataset.waitDuration) || 1000;
     delay += waitDuration;
 
     // 添加打字机效果
-    const text = line.textContent;
-    line.textContent = ''; // 清空文本
+    const text = element.textContent;
+    element.textContent = ''; // 清空文本
     const textLength = text.length;
     let charIndex = 0;
 
     function typeText() {
         if (charIndex < textLength) {
-            line.textContent += text.charAt(charIndex);
+            element.textContent += text.charAt(charIndex);
             charIndex++;
             setTimeout(typeText, 100); // 调整打字速度，根据需要修改
         }
@@ -45,7 +45,7 @@ textLines.forEach((line) => {
 
     setTimeout(typeText, delay); // 延迟后开始打字
 
-    delay += textLength * 100 + delayBetweenLines;
+    delay += textLength * 100 + delayBetweenElements;
 });
 
 // 为打字效果创建CSS动画
