@@ -24,12 +24,36 @@ readPage('./HTML/ownership.html', 'ownership');
 
 
 app.get(['/', '/index'], (req, res) => {
+    console.log('Request URL:', req.url);
+    // 获取用户IP地址
+    const userIP = req.socket.remoteAddress;
+    // 获取请求方式
+    const requestMethod = req.method;
+    // 获取请求头信息
+    const requestHeaders = req.headers;
+    // 将信息输出到控制台
+    console.log('User IP:', userIP);
+    console.log('Request Method:', requestMethod);
+    console.log('Request Headers:', requestHeaders);
+    console.log('\n');
    // 设置title标签为域名正在出售! - 我爱你.world
     res.set('Content-Type', 'text/html; charset=utf-8');
     res.send(index);
 });
 
 app.get('/ownership', (req, res) => {
+    console.log('Request URL:', req.url);
+    // 获取用户IP地址
+    const userIP = req.socket.remoteAddress;
+    // 获取请求方式
+    const requestMethod = req.method;
+    // 获取请求头信息
+    const requestHeaders = req.headers;
+    // 将信息输出到控制台
+    console.log('User IP:', userIP);
+    console.log('Request Method:', requestMethod);
+    console.log('Request Headers:', requestHeaders);
+    console.log('\n');
     // 设置title标签为域名正在出售! - 我爱你.world
     res.set('Content-Type', 'text/html; charset=utf-8');
     res.send(ownership);
@@ -41,5 +65,6 @@ app.use((req, res, next) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log('服务器启动成功');
+    console.log(`服务运行在端口： ${port}`);
 });
