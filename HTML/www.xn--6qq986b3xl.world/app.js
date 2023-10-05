@@ -36,7 +36,7 @@ app.get(['/', '/index'], (req, res) => {
     console.log('Request Method:', requestMethod);
     console.log('Request Headers:', requestHeaders);
     console.log('\n');
-   // 设置title标签为域名正在出售! - 我爱你.world
+    // 指定响应内容的类型和编码
     res.set('Content-Type', 'text/html; charset=utf-8');
     res.send(index);
 });
@@ -54,7 +54,7 @@ app.get('/ownership', (req, res) => {
     console.log('Request Method:', requestMethod);
     console.log('Request Headers:', requestHeaders);
     console.log('\n');
-    // 设置title标签为域名正在出售! - 我爱你.world
+    // 指定响应内容的类型和编码
     res.set('Content-Type', 'text/html; charset=utf-8');
     res.send(ownership);
 });
