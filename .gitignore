@@ -12,3 +12,5 @@ build/
 # temp文件
 /temp_o
 temp/
+# 去除node模块文件
+node_modules/
