@@ -23,20 +23,36 @@ function readPage(filePath, variableName) {
     });
 }
 
-// 中间件函数来获取用户IP、请求方式和请求头信息
+// 中间件函数来获取用户IP、请求方式和请求头信息并记录日志
 function logRequestInfo(req, res, next) {
+    // 获取当前时间戳
+    const timestamp = new Date().toISOString();
+
     console.log('Request URL:', req.url);
-    // 获取用户IP地址
     const userIP = req.socket.remoteAddress;
-    // 获取请求方式
     const requestMethod = req.method;
-    // 获取请求头信息
-    const requestHeaders = req.headers;
-    // 将信息输出到控制台
-    console.log('User IP:', userIP);
-    console.log('Request Method:', requestMethod);
-    console.log('Request Headers:', requestHeaders);
-    console.log('\n');
+    const requestHeaders = JSON.stringify(req.headers, null, 2);
+
+    // 格式化日志信息
+    const logMessage = `${timestamp}\nRequest URL: ${req.url}\nUser IP: ${userIP}\nRequest Method: ${requestMethod}\nRequest Headers: ${requestHeaders}\n\n`;
+
+    // 输出到控制台
+    console.log(logMessage);
+
+    // 保存日志到文件
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const day = now.getDate().toString().padStart(2, '0');
+    const logFileName = `${year}${month}${day}.log`;
+
+    const logPath = './log/' + logFileName;
+    fs.appendFile(logPath, logMessage, (err) => {
+        if (err) {
+            console.error('Error writing to log file:', err);
+        }
+    });
+
     next();
 }
 
@@ -51,13 +67,13 @@ Promise.all([
     app.use(logRequestInfo);
 
     // 设置路由
-    app.get(['/', '/index'], (req, res) => {
+    app.get(['/', '/index','/index.html'], (req, res) => {
         // 指定响应内容的类型和编码
         res.set('Content-Type', 'text/html; charset=utf-8');
         res.send(index);
     });
 
-    app.get('/ownership', (req, res) => {
+    app.get(['/ownership','/ownership.html'], (req, res) => {
         // 指定响应内容的类型和编码
         res.set('Content-Type', 'text/html; charset=utf-8');
         res.send(ownership);
