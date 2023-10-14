@@ -18,3 +18,4 @@ node_modules/
 *.log
 # 去除python虚拟环境文件夹
 request/
+count/

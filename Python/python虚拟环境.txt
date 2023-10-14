@@ -1,0 +1,7 @@
+python -m venv name
+name\Scripts\activate
+rm -r name
+
+list
+1.request
+2.count
