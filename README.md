@@ -3,9 +3,7 @@
 所有代码文件(C++除外)
 
 ### 2. 作者
-[@XueJourney](https://github.com/XueJourney/)
-
-介绍文件:./XueJourney.md
+[@XueJourney](https://github.com/XueJourney/)，[介绍文件](./XueJourney.md)
 
 ### 3. 运行环境
 python:3.6及以上版本
