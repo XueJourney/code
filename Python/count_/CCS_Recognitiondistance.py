@@ -5,7 +5,7 @@ from tqdm import tqdm
 # 定义m的取值范围和步长
 start = -100
 end = 100
-step = 0.000001
+step = 0.0000001
 
 # 生成m的所有可能值
 m_values = np.arange(start, end, step)
