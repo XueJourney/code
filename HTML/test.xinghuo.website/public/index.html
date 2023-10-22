@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>函数图像生成器</title>
+  <script>
+    async function plotFunction() {
+      const func = document.getElementById('functionInput').value;
+      const minX = parseFloat(document.getElementById('minXInput').value);
+      const maxX = parseFloat(document.getElementById('maxXInput').value);
+      const minY = parseFloat(document.getElementById('minYInput').value);
+      const maxY = parseFloat(document.getElementById('maxYInput').value);
+
+      const response = await fetch('/plot', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ func, minX, maxX, minY, maxY }),
+      });
+
+      if (response.ok) {
+        const imageUrl = await response.text();
+        const imgElement = document.getElementById('functionPlot');
+        imgElement.src = imageUrl;
+        imgElement.style.display = 'block'; // 显示图像
+      } else {
+        console.error('Error generating plot');
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>函数图像生成器</h1>
+  <label for="functionInput">请输入函数 (例如：Math.sin(x)):</label>
+  <input type="text" id="functionInput" value="Math.sin(x)">
+  <label for="minXInput">最小X值:</label>
+  <input type="number" id="minXInput" value="-10">
+  <label for="maxXInput">最大X值:</label>
+  <input type="number" id="maxXInput" value="10">
+  <label for="minYInput">最小Y值:</label>
+  <input type="number" id="minYInput" value="-1">
+  <label for="maxYInput">最大Y值:</label>
+  <input type="number" id="maxYInput" value="1">
+  <button onclick="plotFunction()">生成</button>
+  <!-- 图像默认隐藏，直到生成后才显示 -->
+  <img id="functionPlot" src="" alt="函数图像" style="display: none;">
+</body>
+</html>
