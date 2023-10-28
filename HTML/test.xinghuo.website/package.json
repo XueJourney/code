@@ -1,0 +1,15 @@
+{
+  "name": "test.xinghuo.website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "author": "MRXue",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "express": "^4.18.2",
+    "plotly": "^1.0.6"
+  }
+}
