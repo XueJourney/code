@@ -1,0 +1,20 @@
+{
+  "name": "static.xinghuo.website",
+  "version": "1.0.0",
+  "description": "Static file website (API, images, audio, videos, materials, and more)",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js",
+    "start": "node app.js"
+  },
+  "author": "MrXue",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.3",
+    "fs": "^0.0.1-security",
+    "helmet": "^7.0.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1"
+  }
+}

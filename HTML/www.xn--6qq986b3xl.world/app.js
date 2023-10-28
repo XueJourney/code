@@ -1,100 +1,105 @@
 const express = require('express');
 const fs = require('fs');
-const rateLimit = require("express-rate-limit");
+const helmet = require('helmet');
+const morgan = require('morgan');
+const rateLimit = require('express-rate-limit'); // 添加缺失的导入
 
 const app = express();
 const port = 7001;
 
-// 从 'public' 目录提供静态文件
 app.use(express.static('public'));
 
-// 定义一个函数，用于从文件中读取页面内容
-function readPage(filePath, variableName) {
+const web_page = {};
+
+function readPage(directory, fileName) {
     return new Promise((resolve, reject) => {
-        fs.readFile(filePath, 'utf8', (err, data) => {
-            if (err) {
-                console.error('读取文件出错:', err);
-                reject(err);
-            } else {
-                global[variableName] = data;
-                resolve();
-            }
+        const filePath = `${directory}/${fileName}`;
+        let fileContent = '';
+
+        const readStream = fs.createReadStream(filePath, { encoding: 'utf8' });
+
+        readStream.on('data', (chunk) => {
+            fileContent += chunk;
+        });
+
+        readStream.on('end', () => {
+            web_page[fileName] = fileContent;
+            resolve();
+        });
+
+        readStream.on('error', (err) => {
+            console.error('读取文件出错:', err);
+            reject(err);
         });
     });
 }
 
-// 中间件，用于记录请求信息
-function logRequestInfo(req, res, next) {
-    const timestamp = new Date().toISOString();
-    const userIP = req.socket.remoteAddress;
-    const requestMethod = req.method;
-    const requestHeaders = JSON.stringify(req.headers, null, 2);
-
-    const logMessage = `${timestamp}\n请求 URL: ${req.url}\n用户 IP: ${userIP}\n请求方法: ${requestMethod}\n请求头信息: ${requestHeaders}\n\n`;
-
-    console.log(logMessage);
-
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = (now.getMonth() + 1).toString().padStart(2, '0');
-    const day = now.getDate().toString().padStart(2, '0');
-    const logFileName = `${year}${month}${day}.log`;
-
-    const logPath = `./log/${logFileName}`;
-    fs.appendFile(logPath, logMessage, (err) => {
-        if (err) {
-            console.error('写入日志文件出错:', err);
-        }
-    });
-
-    next();
-}
-
-readPage('./error/429.html', 'error_429')
 const limiter = rateLimit({
     windowMs: 60 * 1000, // 1 minute
     max: 60,
     keyGenerator: (req) => req.ip,
     handler: (req, res) => {
-        // Send a 429 response with the custom message
-        res.status(429).send(error_429);
+        res.status(429).send(web_page["error_429.html"]); // 使用正确的文件名
     },
 });
 
-// 使用 Promise 来确保页面文件加载完成
 Promise.all([
-    readPage('./error/404.html', 'error_404'),
-    readPage('./HTML/index.html', 'index'),
-    readPage('./HTML/ownership.html', 'ownership')
+    readPage('./error/', '404.html'),
+    readPage('./error/', '429.html'),
+    readPage('./HTML/', 'index.html'),
+    readPage('./HTML/', 'ownership.html'),
+    // readPage('./error/', 'error_500.html')
 ])
 .then(() => {
-    app.use(logRequestInfo);
-    app.use(limiter);
+    app.use(helmet());
+    app.use(morgan('combined'));
+    // app.use(morgan('dev'))
 
-    // 设置路由
-    app.get(['/', '/index', '/index.html'], (req, res) => {
-        res.set('Content-Type', 'text/html; charset=utf-8');
-        res.send(index);
-    });
-
-    app.get(['/ownership', '/ownership.html'], (req, res) => {
-        res.set('Content-Type', 'text/html; charset=utf-8');
-        res.send(ownership);
-    });
+    // CSP配置
+    app.use(
+        helmet.contentSecurityPolicy({
+            directives: {
+                defaultSrc: ["'self'"], // 默认只允许从当前域名加载内容
+                scriptSrc: ["'self'", "https://static.xinghuo.website","https://cdn.bootcdn.net"], // 允许从当前域名和 static.xinghuo.website 加载脚本
+                styleSrc: ["'self'", "https://static.xinghuo.website","https://cdn.jsdelivr.net"], // 允许从当前域名和 static.xinghuo.website 加载样式
+                imgSrc: ["'self'", "https://static.xinghuo.website"], // 允许从当前域名和 static.xinghuo.website 加载图片
+                fontSrc: ["'self'", "https://static.xinghuo.website"], // 允许从当前域名和 static.xinghuo.website 加载字体
+                connectSrc: ["'self'", "https://v.api.aa1.cn"],
+            },
+        })
+    );
 
     app.use((req, res, next) => {
-        const status = res.statusCode;
-        if (status === 404) {
-            res.send(error_404);
-        } else {
-            next();
+        res.set('Content-Type', 'text/html; charset=utf-8');
+        next();
+    });
+
+    const routes = express.Router();
+    routes.get(['/', '/index', '/index.html'], (req, res) => {
+        res.send(web_page["index.html"]);
+    });
+    routes.get(['/ownership', '/ownership.html'], (req, res) => {
+        res.send(web_page["ownership.html"]); // 修复文件名
+    });
+    app.use(routes);
+
+    app.use(limiter);
+
+    // 404 错误处理
+    app.use((req, res, next) => {
+        if (!res.headersSent) {
+            res.status(404).send(web_page["error_404.html"]);
         }
     });
 
-    // 创建服务器并监听端口
+    // 500 错误处理
+    // app.use((err, req, res, next) => {
+    //     console.error(err.stack);
+    //     res.status(500).send(web_page["error_500.html"]);
+    // });
+
     app.listen(port, () => {
-        console.log('服务器启动成功');
-        console.log(`服务运行在端口： ${port}`);
+        console.log(`服务器启动成功，服务运行在端口：${port}`);
     });
 })
 .catch(err => {
