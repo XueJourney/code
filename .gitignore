@@ -5,8 +5,6 @@ build/
 # 去除vscode配置文件
 *.code-workspace
 \.vscode
-# 去除github文件
-.github/
 # temp文件
 /temp_o
 temp/
