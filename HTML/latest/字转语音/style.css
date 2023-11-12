@@ -1,0 +1,63 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  color: #fff;
+/*   background-image: linear-gradient(45deg, #4158d0, #c850c0, #ffcc70); */
+  background-color: #c850c0;
+  font: 1.25rem/1 'Poppins', sans-serif;
+}
+
+.wrapper {
+  display: grid;
+  gap: 20px;
+  width: 600px;
+  max-width: calc(100vw - 40px);
+  padding: 30px;
+  border-radius: 10px;
+  background-color: #0003;
+}
+
+#text {
+  display: block;
+  height: 100px;
+  padding: 20px;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  resize: vertical;
+  border-radius: 10px;
+}
+
+.properties {
+  display: grid;
+  grid-template-columns: max-content minmax(0, auto) 40px;
+  gap: 20px;
+  padding: 20px;
+  background-color: #0003;
+  border-radius: 10px;
+}
+
+#voice {
+  font-size: 0.875rem;
+  font-family: inherit;
+}
+
+#speak {
+  padding: 10px;
+  border: 1px solid #fff;
+  color: #fff;
+  background-color: #0009;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  appearance: none;
+  border-radius: 10px;
+}

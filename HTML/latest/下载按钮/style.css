@@ -1,0 +1,406 @@
+.upload {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  position: relative;
+  border: 2px solid #419AFE;
+  cursor: pointer;
+  transform: translateZ(0);
+  transition: transform 0.2s ease;
+}
+.upload .path {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  margin: -36px 0 0 -36px;
+  width: 72px;
+  height: 72px;
+}
+.upload .path .arrow {
+  bottom: 27px;
+  width: 2px;
+  height: 21px;
+  position: absolute;
+  left: 50%;
+  border-radius: 1px;
+  margin: 0 0 0 -1px;
+  transform-origin: 50% 100%;
+}
+.upload .path .arrow:before, .upload .path .arrow:after {
+  content: "";
+  display: block;
+  width: 2px;
+  height: 14px;
+  bottom: -2px;
+  background: #fff;
+  position: absolute;
+  border-radius: 1px;
+  transform-origin: 50% 100%;
+}
+.upload .path .arrow:before {
+  right: 50%;
+  transform: rotate(-44deg) translateX(2px);
+}
+.upload .path .arrow:after {
+  left: 50%;
+  transform: rotate(44deg) translateX(-2px);
+}
+.upload .path svg {
+  width: 72px;
+  height: 72px;
+  display: block;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-dashoffset: 592.73;
+  stroke-dasharray: 0 592.73 20 592.73;
+}
+.upload .circle {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  margin: -29px 0 0 -29px;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  overflow: hidden;
+}
+.upload .circle .water {
+  transform: translateY(116%);
+  background: #419AFE;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.upload .circle .water svg {
+  display: block;
+  width: 116px;
+  height: 6px;
+  position: absolute;
+  bottom: 100%;
+}
+.upload .circle .water svg:nth-child(1) {
+  right: 0;
+  fill: #308FFA;
+  -webkit-animation: forward 1.65s infinite;
+          animation: forward 1.65s infinite;
+}
+.upload .circle .water svg:nth-child(2) {
+  left: 0;
+  fill: #419AFE;
+  margin-bottom: -1px;
+  -webkit-animation: backward 0.825s infinite linear;
+          animation: backward 0.825s infinite linear;
+}
+.upload.loading .path {
+  -webkit-animation: movePath 0.4s linear forwards;
+          animation: movePath 0.4s linear forwards;
+}
+.upload.loading .path .arrow {
+  -webkit-animation: arrow 0.5s linear forwards 3.7s;
+          animation: arrow 0.5s linear forwards 3.7s;
+}
+.upload.loading .path .arrow:before {
+  -webkit-animation: arrowB 0.4s linear forwards, arrowBCheck 0.5s linear forwards 3.7s;
+          animation: arrowB 0.4s linear forwards, arrowBCheck 0.5s linear forwards 3.7s;
+}
+.upload.loading .path .arrow:after {
+  -webkit-animation: arrowA 0.4s linear forwards, arrowACheck 0.5s linear forwards 3.7s;
+          animation: arrowA 0.4s linear forwards, arrowACheck 0.5s linear forwards 3.7s;
+}
+.upload.loading .path svg {
+  -webkit-animation: load 3s linear forwards 0.45s, reset 0.7s linear forwards 3.7s;
+          animation: load 3s linear forwards 0.45s, reset 0.7s linear forwards 3.7s;
+}
+.upload.loading .circle .water {
+  -webkit-animation: fill 3s linear forwards 0.45s;
+          animation: fill 3s linear forwards 0.45s;
+}
+.upload:active {
+  transform: scale(0.92) translateZ(0);
+}
+
+@-webkit-keyframes load {
+  0% {
+    stroke-dashoffset: 592.73;
+    stroke-dasharray: 0 592.73 20 592.73;
+  }
+  42% {
+    stroke-dasharray: 0 592.73 80 592.73;
+  }
+  85% {
+    stroke-dashoffset: 80;
+    stroke-dasharray: 0 592.73 32 592.73;
+  }
+  100% {
+    stroke-dashoffset: 32;
+    stroke-dasharray: 0 592.73 32 592.73;
+  }
+}
+
+@keyframes load {
+  0% {
+    stroke-dashoffset: 592.73;
+    stroke-dasharray: 0 592.73 20 592.73;
+  }
+  42% {
+    stroke-dasharray: 0 592.73 80 592.73;
+  }
+  85% {
+    stroke-dashoffset: 80;
+    stroke-dasharray: 0 592.73 32 592.73;
+  }
+  100% {
+    stroke-dashoffset: 32;
+    stroke-dasharray: 0 592.73 32 592.73;
+  }
+}
+@-webkit-keyframes reset {
+  0%, 99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes reset {
+  0%, 99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes movePath {
+  70% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes movePath {
+  70% {
+    transform: translateY(-10px);
+  }
+}
+@-webkit-keyframes arrow {
+  0% {
+    background: #fff;
+    transform: rotate(34deg) translate(-2.5px, 2px);
+  }
+  40% {
+    transform: rotate(-7deg) translate(0, 0);
+  }
+  99% {
+    transform: rotate(0) translate(0, 0);
+  }
+  100% {
+    background: #fff;
+  }
+}
+@keyframes arrow {
+  0% {
+    background: #fff;
+    transform: rotate(34deg) translate(-2.5px, 2px);
+  }
+  40% {
+    transform: rotate(-7deg) translate(0, 0);
+  }
+  99% {
+    transform: rotate(0) translate(0, 0);
+  }
+  100% {
+    background: #fff;
+  }
+}
+@-webkit-keyframes arrowBCheck {
+  0%, 20% {
+    transform: rotate(-86deg) translateX(2px) translateY(1px) scaleY(0.714);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-44deg) translateX(2px) scaleY(1) translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes arrowBCheck {
+  0%, 20% {
+    transform: rotate(-86deg) translateX(2px) translateY(1px) scaleY(0.714);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-44deg) translateX(2px) scaleY(1) translateY(0);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes arrowACheck {
+  0% {
+    transform: rotate(0deg) translate(-1px, -1px);
+    opacity: 1;
+  }
+  40% {
+    transform: rotate(60deg) translate(-2px, 1px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(44deg) translateX(-2px);
+    opacity: 1;
+  }
+}
+@keyframes arrowACheck {
+  0% {
+    transform: rotate(0deg) translate(-1px, -1px);
+    opacity: 1;
+  }
+  40% {
+    transform: rotate(60deg) translate(-2px, 1px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(44deg) translateX(-2px);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes arrowB {
+  0% {
+    transform: rotate(-44deg) translateX(2px);
+  }
+  60% {
+    transform: rotate(-60deg) translateX(2px);
+  }
+  99% {
+    transform: rotate(0deg) translateX(1px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) translateX(1px);
+    opacity: 0;
+  }
+}
+@keyframes arrowB {
+  0% {
+    transform: rotate(-44deg) translateX(2px);
+  }
+  60% {
+    transform: rotate(-60deg) translateX(2px);
+  }
+  99% {
+    transform: rotate(0deg) translateX(1px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) translateX(1px);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes arrowA {
+  0% {
+    transform: rotate(44deg) translateX(-2px);
+  }
+  60% {
+    transform: rotate(60deg) translateX(-2px);
+  }
+  99% {
+    transform: rotate(0deg) translateX(-1px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) translateX(-1px);
+    opacity: 0;
+  }
+}
+@keyframes arrowA {
+  0% {
+    transform: rotate(44deg) translateX(-2px);
+  }
+  60% {
+    transform: rotate(60deg) translateX(-2px);
+  }
+  99% {
+    transform: rotate(0deg) translateX(-1px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) translateX(-1px);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fill {
+  0% {
+    transform: translateY(116%);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+@keyframes fill {
+  0% {
+    transform: translateY(116%);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+@-webkit-keyframes backward {
+  100% {
+    transform: translateX(-50%);
+  }
+}
+@keyframes backward {
+  100% {
+    transform: translateX(-50%);
+  }
+}
+@-webkit-keyframes forward {
+  100% {
+    transform: translateX(50%);
+  }
+}
+@keyframes forward {
+  100% {
+    transform: translateX(50%);
+  }
+}
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: inherit;
+}
+*:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Roboto, Arial;
+  color: #ADAFB6;
+  background: #2286F6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .dribbble {
+  position: fixed;
+  display: block;
+  right: 24px;
+  bottom: 24px;
+}
+body .dribbble img {
+  display: block;
+  width: 76px;
+}
