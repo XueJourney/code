@@ -202,16 +202,16 @@ function getExchangeRate() {
   }
   exchangeRateTxt.innerText = "Getting exchange rate...";
 
-  // 发送请求到服务器端
-  fetch(`/getExchangeRate?from=${fromCurrency.value}&to=${toCurrency.value}&amount=${amountVal}`)
-    .then(response => response.json())
-    .then(result => {
-      let totalExRate = (amountVal * result.exchangeRate).toFixed(2);
-      exchangeRateTxt.innerText = `${amountVal} ${fromCurrency.value} = ${totalExRate} ${toCurrency.value}`;
-    })
-    .catch(() => {
-      exchangeRateTxt.innerText = "Something went wrong";
-    });
+    // Fetch request to your server endpoint
+    fetch(`/getExchangeRate?from=${fromCurrency.value}&to=${toCurrency.value}`)
+        .then(response => response.json())
+        .then(result => {
+            let totalExRate = (amountVal * result.exchangeRate).toFixed(2);
+            exchangeRateTxt.innerText = `${amountVal} ${fromCurrency.value} = ${totalExRate} ${toCurrency.value}`;
+        })
+        .catch(() => {
+            exchangeRateTxt.innerText = "Something went wrong";
+        });
 }
 
 // 设置事件监听器

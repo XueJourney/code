@@ -3,8 +3,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const fs = require('fs');
-// 汇率API
-const { getExchangeRate } = require('./module/exchangeRate');
+const { getExchangeRate } = require('./module/exchangeRate'); // Corrected file path.
 
 // 配置
 const app = express();
@@ -79,10 +78,10 @@ Promise.all([
 
     // 定义页面
     const routes = express.Router();
-    app.use((req, res, next) => {
-        res.setHeader('X-Content-Type-Options', 'nosniff');
-        next();
-    });
+    // app.use((req, res, next) => {
+    //     res.setHeader('X-Content-Type-Options', 'nosniff');
+    //     next();
+    // });
 
     routes.get(['/', '/index', '/index.html'], (req, res) => {
         res.send(web_page["index.html"]);
@@ -94,20 +93,18 @@ Promise.all([
         if (!from || !to) {
             return res.status(400).send('Missing required query parameters: from and to');
         }
-
         getExchangeRate(from, to)
-        .then(rates => {
-            const exchangeRate = rates[to];
-            if (exchangeRate) {
-                res.json({ exchangeRate });
-            } else {
-                res.status(404).send(`Exchange rate not found for ${to}`);
-            }
-        })
-        .catch((error) => {
-            console.error('Error fetching exchange rate:', error.message); // 提供更详细的错误信息
-            res.status(500).send('Error fetching exchange rate');
-        });
+            .then(exchangeRate => {
+                if (exchangeRate) {
+                    res.json({ exchangeRate });
+                } else {
+                    res.status(404).send(`Exchange rate not found for ${to}`);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching exchange rate:', error.message);
+                res.status(500).send('Error fetching exchange rate');
+            });
     });
 
     // 路由页面
