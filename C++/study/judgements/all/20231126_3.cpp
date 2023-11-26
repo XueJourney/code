@@ -1,14 +1,15 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 int main(){
     int a,b,c,d;
     scanf("%d %d %d",&a,&b,&c);
-    if(c%b==0){
-        d=c/b;
+    d = ceil(c/b);
+    if(d<a){
+        printf("剩下%.0f个苹果",a-c);
     }else{
-        d=c/b+1;
+        printf("没有苹果了");
     }
-    printf("%d",a-d);
     return 0;
 }
