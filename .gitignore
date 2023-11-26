@@ -15,5 +15,6 @@ node_modules/
 # 去除python虚拟环境文件夹
 request/
 count/
+api_/
 # 去除C++编译文件
 *.exe
