@@ -3,7 +3,6 @@ const fs = require('fs');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const moment = require('moment');
-const rateLimit = require('express-rate-limit');
 
 const app = express();
 app.use(bodyParser.json());
@@ -118,122 +117,69 @@ function writeLog(isSuccess, logData, responseData = null) {
     console.log(logEntry);
 }
 
-
-
-// 基于IP的速率限制（每秒20次请求）
-const idcardRateLimiter = rateLimit({
-    windowMs: 1000, // 1秒
-    max: 20, // 每个IP限制每秒20次请求
-    message: JSON.stringify({ error: '来自此IP的请求过多，请一秒后再试' })
-});
-
-// 基于姓名的请求限制设置
-const nameRequestCounts = {}; // 用于存储基于姓名的请求计数的对象
-
 // 处理POST请求
-app.post('/api/idcard', idcardRateLimiter, async (req, res) => {
-    const { idcard, name } = req.body; // 使用POST请求时，从请求体中获取参数
-    const currentDate = new Date().toISOString().split('T')[0]; // 获取当前日期
+app.post('/api/idcard', async (req, res) => {
+    res.status(200).json({error:"zh:系统正在维护 en:The system is being maintained"})
+    // try {
+    //     const { idcard, name } = req.query;
+    //     const result = await requesting(idcard, name);
 
-    // 初始化或更新姓名的请求计数
-    if (!nameRequestCounts[name]) {
-        nameRequestCounts[name] = { date: currentDate, count: 1 };
-    } else if (nameRequestCounts[name].date === currentDate) {
-        if (nameRequestCounts[name].count >= 10) {
-            // 记录因请求限制而失败的请求
-            writeLog(false, {
-                method: 'POST',
-                headers: req.headers,
-                body: req.body,
-                idcard,
-                name
-            }, { error: '此姓名今日请求限制已达到' });
-            return res.status(429).json({ error: '此姓名今日请求限制已达到' });
-        }
-        nameRequestCounts[name].count += 1;
-    } else {
-        nameRequestCounts[name] = { date: currentDate, count: 1 };
-    }
-    try {
-        const result = await requesting(idcard, name);
-        // 记录成功的请求，包括响应数据
-        writeLog(true, {
-            method: 'POST',
-            headers: req.headers,
-            body: req.body,
-            idcard,
-            name
-        }, result);
+    //     // 记录成功的请求，包括响应数据
+    //     writeLog(true, {
+    //         method: 'POST',
+    //         headers: req.headers,
+    //         body: req.body,
+    //         idcard,
+    //         name
+    //     }, result);
 
-        res.json(result);
-    } catch (error) {
-        // 记录API级别的错误
-        writeLog(false, {
-            method: 'POST',
-            headers: req.headers,
-            body: req.body,
-            idcard,
-            name
-        }, { error: error.message });
+    //     res.json(result);
+    // } catch (error) {
+    //     // 记录失败的请求，包括错误信息
+    //     writeLog(false, {
+    //         method: 'POST',
+    //         headers: req.headers,
+    //         body: req.body,
+    //         idcard: req.query.idcard,
+    //         name: req.query.name
+    //     }, { error: error.message });
 
-        res.status(500).json({ error: error.message });
-    }
+    //     // 500
+    //     res.status(200).json({ error: error.message });
+    // }
 });
-
-
 
 // 处理GET请求
-app.get('/api/idcard', idcardRateLimiter, async (req, res) => {
-    const { idcard, name } = req.query; // 使用GET请求时，从查询参数中获取
-    const currentDate = new Date().toISOString().split('T')[0]; // 获取当前日期
+app.get('/api/idcard', async (req, res) => {
+    res.status(200).json({error:"zh:系统正在维护 en:The system is being maintained"})
+    // try {
+    //     const { idcard, name } = req.query;
+    //     const result = await requesting(idcard, name);
 
-    // 初始化或更新姓名的请求计数
-    if (!nameRequestCounts[name]) {
-        nameRequestCounts[name] = { date: currentDate, count: 1 };
-    } else if (nameRequestCounts[name].date === currentDate) {
-        if (nameRequestCounts[name].count >= 10) {
-            // 记录因请求限制而失败的请求
-            writeLog(false, {
-                method: 'GET',
-                headers: req.headers,
-                query: req.query,
-                idcard,
-                name
-            }, { error: '此姓名今日请求限制已达到' });
-            return res.status(429).json({ error: '此姓名今日请求限制已达到' });
-        }
-        nameRequestCounts[name].count += 1;
-    } else {
-        nameRequestCounts[name] = { date: currentDate, count: 1 };
-    }
+    //     // 记录成功的请求，包括响应数据
+    //     writeLog(true, {
+    //         method: 'GET',
+    //         headers: req.headers,
+    //         body: req.body,
+    //         idcard,
+    //         name
+    //     }, result);
 
-    try {
-        const result = await requesting(idcard, name);
-        // 记录成功的请求，包括响应数据
-        writeLog(true, {
-            method: 'GET',
-            headers: req.headers,
-            query: req.query,
-            idcard,
-            name
-        }, result);
+    //     res.json(result);
+    // } catch (error) {
+    //     // 记录失败的请求，包括错误信息
+    //     writeLog(false, {
+    //         method: 'GET',
+    //         headers: req.headers,
+    //         body: req.body,
+    //         idcard: req.query.idcard,
+    //         name: req.query.name
+    //     }, { error: error.message });
 
-        res.json(result);
-    } catch (error) {
-        // 记录API级别的错误
-        writeLog(false, {
-            method: 'GET',
-            headers: req.headers,
-            query: req.query,
-            idcard,
-            name
-        }, { error: error.message });
-
-        res.status(500).json({ error: error.message });
-    }
+    //     // 500
+    //     res.status(200).json({ error: error.message });
+    // }
 });
-
-
 
 const PORT = 7005;
 app.listen(PORT, () => {
