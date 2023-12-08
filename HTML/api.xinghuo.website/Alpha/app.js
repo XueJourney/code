@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const rateLimit = require('express-rate-limit');
 const setupIdcardRoutes = require('./api/idcard/idcardRoutes');
+const { logger, setuplogRoutes } = require('./api/addlog');
 
 
 const app = express();
@@ -14,6 +15,7 @@ const idcardRateLimiter = rateLimit({
     message: JSON.stringify({ error: '来自此IP的请求过多，请一秒后再试' })
 });
 
+setuplogRoutes(app) // 通用日志记录
 setupIdcardRoutes(app, idcardRateLimiter); // idcard API
 
 const PORT = 7005;

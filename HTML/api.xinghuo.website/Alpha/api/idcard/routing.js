@@ -46,19 +46,36 @@ async function handleRequest(req, res, method) {
         writeLog(false, { method, headers: req.headers, body: req.body, idcard, name }, { error: errorMessage });
         return res.status(429).json({ error: errorMessage });
     }
-
-    try {
-        // 发起请求并获取结果
-        const result = await requesting(idcard, name);
-        // 记录成功的请求
-        writeLog(true, { method, headers: req.headers, body: req.body, idcard, name }, result);
-        // 返回结果
-        res.json(result);
-    } catch (error) {
-        // 记录API级别的错误
-        writeLog(false, { method, headers: req.headers, body: req.body, idcard, name }, { error: error.message });
-        // 返回错误信息
-        res.status(500).json({ error: error.message });
+        // 如果输入的name和idcard符合特定条件，则直接返回预设的结果(示例数据)
+        if (name === "张三" && idcard === "123456789101") {
+            console.log("Return sample data");
+            res.json({
+                "code": "0",
+                "message": "成功",
+                "result": {
+                    "name": "张三",
+                    "idcard": "000000000000000",
+                    "res": "1",
+                    "description": "一致",
+                    "sex": "男",
+                    "birthday": "00000000",
+                    "address": "示例"
+                }
+            });
+        } else{
+        try {
+            // 发起请求并获取结果
+            const result = await requesting(idcard, name);
+            // 记录成功的请求
+            writeLog(true, { method, headers: req.headers, body: req.body, idcard, name }, result);
+            // 返回结果
+            res.json(result);
+        } catch (error) {
+            // 记录API级别的错误
+            writeLog(false, { method, headers: req.headers, body: req.body, idcard, name }, { error: error.message });
+            // 返回错误信息
+            res.status(500).json({ error: error.message });
+        }
     }
 }
 
