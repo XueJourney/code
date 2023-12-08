@@ -1,7 +1,7 @@
 import requests
 
 def authenticate(idcard, name):
-    url = "http://127.0.0.1:7005/api/idcard"
+    url = "http://api.xinghuo.website/api/idcard"
     params = {
         "idcard": idcard,
         "name": name

@@ -38,18 +38,10 @@ function updateNameRequestCount(name) {
 // 适用于POST和GET请求
 async function handleRequest(req, res, method) {
     const { idcard, name } = method === 'POST' ? req.body : req.query;
-
-    // 检查请求次数是否超过限制
-    if (!updateNameRequestCount(name)) {
-        const errorMessage = '此姓名今日请求限制已达到';
-        // 记录请求限制错误
-        writeLog(false, { method, headers: req.headers, body: req.body, idcard, name }, { error: errorMessage });
-        return res.status(429).json({ error: errorMessage });
-    }
         // 如果输入的name和idcard符合特定条件，则直接返回预设的结果(示例数据)
         if (name === "张三" && idcard === "123456789101") {
             console.log("Return sample data");
-            res.json({
+            res.status(200).json({
                 "code": "0",
                 "message": "成功",
                 "result": {
@@ -64,6 +56,13 @@ async function handleRequest(req, res, method) {
             });
         } else{
         try {
+            // 检查请求次数是否超过限制
+            if (!updateNameRequestCount(name)) {
+                const errorMessage = '此姓名今日请求限制已达到';
+                // 记录请求限制错误
+                writeLog(false, { method, headers: req.headers, body: req.body, idcard, name }, { error: errorMessage });
+                return res.status(429).json({ error: errorMessage });
+            }
             // 发起请求并获取结果
             const result = await requesting(idcard, name);
             // 记录成功的请求
@@ -74,7 +73,7 @@ async function handleRequest(req, res, method) {
             // 记录API级别的错误
             writeLog(false, { method, headers: req.headers, body: req.body, idcard, name }, { error: error.message });
             // 返回错误信息
-            res.status(500).json({ error: error.message });
+            res.status(200).json({ error: error.message });
         }
     }
 }

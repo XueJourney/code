@@ -48,7 +48,7 @@ function writeLog(isSuccess, logData, responseData = null) {
 
 async function requesting(idcard, name) {
     // 如果输入的name和idcard符合特定条件，则直接返回预设的结果(示例数据)
-    if (name === "张三" && idcard === "123456789101") {
+    if (decodeURIComponent(name) === "张三" && idcard === "123456789101") {
         console.log("Return sample data");
         return {
             "code": "0",
