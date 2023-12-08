@@ -1,11 +1,11 @@
 {
   "name": "api.xinghuo.website",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.1.0",
+  "description": "xinghuo free api",
   "main": "app.js",
   "scripts": {
-    "test": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "nodemon app.js"
   },
   "author": "XueJourney",
   "license": "GPL-3.0",
@@ -14,12 +14,12 @@
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
     "express-rate-limit": "^7.1.5",
-    "fs": "^0.0.1-security",
     "moment": "^2.29.4",
-    "nodemon": "^3.0.1"
+    "winston": "^3.11.0"
   },
   "devDependencies": {
     "jest": "^29.7.0",
-    "nock": "^13.3.8"
+    "nock": "^13.3.8",
+    "nodemon": "^3.0.1"
   }
 }
