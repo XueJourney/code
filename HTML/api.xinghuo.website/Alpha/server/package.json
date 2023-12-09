@@ -4,8 +4,8 @@
   "description": "xinghuo free api",
   "main": "app.js",
   "scripts": {
-    "start": "concurrently \"npm run start --prefix server\" \"npm run serve --prefix client\"",
-    "test": "concurrently \"npm run test --prefix server\" \"npm run serve --prefix client\""
+    "start": "concurrently \"node app.js --prefix server\" \"npm run serve --prefix client\"",
+    "test": "concurrently \"nodemon app.js --prefix server\" \"npm run serve --prefix client\""
   },
   "author": "XueJourney",
   "license": "GPL-3.0",
