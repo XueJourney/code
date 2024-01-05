@@ -1,0 +1,14 @@
+{
+  "name": "rna.xinghuo.website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "author": "Xue Zhongze",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
