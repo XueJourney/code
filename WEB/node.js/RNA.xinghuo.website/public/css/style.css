@@ -1,0 +1,24 @@
+html{
+    /* 设置背景浅黑色 */
+    background-color: #F5F5F5;
+}
+body{
+    /* 横向居中显示 */
+    text-align: center;
+    /* 设置每行显示内容的宽不超过页面的50% */
+    max-width: 70%;
+    margin: 0 auto;
+    /* 设置背景白色 */
+    background-color: white;
+    /* 蒙版圆角 */
+    border-radius: 10px;
+    /* 设置背景阴影 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* 文字内容上下留出20px */
+    padding: 20px;
+    /* 蒙版上下居中 */
+    margin-top: 2%;
+    margin-bottom: 2%;
+    /* 每行文字之间默认换行 */
+    word-wrap: break-word;
+}

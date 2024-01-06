@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/infof.css">
+    <title>认证页面</title>
+</head>
+<body>
+    <h1>本次实名认证的ID为:<span id="id"></span></h1>
+    <div class="infof">
+        <h4>请按照要求填写你的信息</h4>
+        <p>请填写你的姓名:</p>
+        <input type="text" id="name">
+        <p>请填写你的身份证号码:</p>
+        <input type="text" id="idCard">
+        <br>
+        <button id="submit">提交</button>
+        <button id="back">返回</button>
+    </div>
+
+    <script>
+        // 获取认证ID
+        // 获取当前访问路径
+        var path = window.location.pathname;
+        // console.log(path);
+        // 按"/"分割路径
+        var pathArr = path.split("/");
+        // 获取第一个accreditation的位置
+        var index = pathArr.indexOf("accreditation");
+        // 获取认证ID
+        var accreditationId = pathArr[index + 1];
+        // console.log(accreditationId);
+        document.getElementById("id").innerText = accreditationId;
+
+        // 验证填写的身份证信息
+        document.getElementById("submit").addEventListener("click", function
+        () {
+            var name = document.getElementById("name").value;
+            var idCard = document.getElementById("idCard").value;
+            // 验证姓名(长度和汉字)
+            if (!/^[\u4e00-\u9fa5]{2,4}$/.test(name))
+            {
+                alert("姓名格式错误");
+                return;
+            }
+            // 验证身份证号码
+            if (!/^([1-6][1-9]|50)\d{4}(18|19|20)\d{2}((0[1-9])|10|11|12)(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(idCard)) {
+                alert("身份证号码格式错误");
+                return;
+            }
+            // 验证通过,进行下一步
+            // 发送get,链接为:/api/accreditation/:id/:name/:idcard
+            fetch("/api/accreditation/" + accreditationId + "/" + name + "/" + idCard)
+            .then(response => {
+                if (response.ok) {
+                    return response.json(); // 或者处理你需要的数据格式
+                }
+                throw new Error('请求失败');
+            })
+            .then(data => {
+                // 处理响应数据
+                console.log(data);
+                // 判断是否存在error键
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    alert("认证成功,即将跳转至结果页");
+                    // 跳转到下一个页面
+                    window.location.href = "/result/" + accreditationId;
+                }
+            })
+            .catch(error => {
+                // 处理错误情况
+                console.error('请求出错:', error);
+                alert('出现错误,即将跳转至首页');
+                window.location.href = "/";
+            });
+        });
+    </script>
+</body>
+</html>

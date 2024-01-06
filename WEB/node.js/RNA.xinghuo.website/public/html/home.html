@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/infof.css">
+    <title>首页</title>
+</head>
+<body>
+    <h1>欢迎使用快捷<strong>实名认证</strong>功能</h1>
+    <br>
+    <font color="#9D9D9D">本功能由<strong>XueJourney</strong>开发,并享有最终解释权,并在此保证,我将保护所有人的信息安全</font>
+    <div class="infof">
+        <!-- 输入框 -->
+        <p>本次实名认证的ID,默认随机值:</p>
+        <input type="text" id="id" placeholder="请输入您的ID(6位数)">
+        <!-- 按钮 -->
+        <button onclick="start()">开始认证</button>
+    </div>
+
+
+    <script>
+        function generateRandomSixDigitString() {
+            return (Math.floor(100000 + Math.random() * 900000)).toString();
+        }
+        // 获取输入框元素
+        var input = document.getElementById("id");
+        // 设置输入框的默认值(str 随机6位数)
+        input.value = generateRandomSixDigitString();
+        // 设置输入限制,最高最低6位
+        input.setAttribute("maxlength", "6");
+        input.setAttribute("minlength", "6");
+        // 输入框回车绑定事件onclick="start()"
+        input.onkeydown = function(event) {
+            if (event.keyCode === 13) {
+                start();
+            }
+        };
+
+        // 失去焦点事件时，判断输入框内容并作出相应处理
+        input.addEventListener("blur", function() {
+            var value = parseInt(input.value);
+            if (isNaN(value)) {
+                value = 0;
+            }
+
+            // 将数值转换为字符串，并补零直到达到六位长度
+            var stringValue = value.toString();
+            while (stringValue.length < 6) {
+                stringValue += "0";
+            }
+
+            // 如果字符串全为零，则使用生成的六位随机数字字符串
+            if (/^0+$/.test(stringValue)) {
+                stringValue = generateRandomSixDigitString();
+            }
+
+            input.value = stringValue;
+        });
+
+        // 监听输入框的输入事件，实时限制输入值为数字且长度不超过六位
+        input.addEventListener("input", function() {
+            var value = input.value;
+            // 限制长度，移除非数字字符
+            if (value.length > 6) {
+                input.value = value.slice(0, 6);
+            } else {
+                input.value = value.replace(/\D/g, ""); // 移除非数字字符
+            }
+        });
+
+        // 绑定start事件
+        function start(){
+            // 跳转至/accreditation/+输入框内容
+            window.location.href = '/accreditation/' + input.value;
+        }
+    </script>
+</body>
+</html>

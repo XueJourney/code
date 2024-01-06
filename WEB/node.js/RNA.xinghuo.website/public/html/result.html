@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/infof.css">
+    <title>结果查询</title>
+</head>
+<body>
+    <h1>ID: <font color="#990909"><span id="id"></span></font> 认证结果查询</h1>
+    <br>
+    <div id="infof">
+        <p>认证姓名：<i><strong><span id="name"></span></strong></i></p>
+        <p>认证身份证：<i><strong><span id="idcard"></span></strong></i></p>
+        <p>认证结果：<i><strong><span id="result"></span></strong></i></p>
+        <p>认证时间：<i><strong><span id="time"></span></strong></i></p>
+    </div>
+    <br>
+    <font color="#f70a0a">请不要修改页面,请直接截图发送给企业</font>
+    <script>
+        // 获取认证ID
+        // 获取当前访问路径
+        var path = window.location.pathname;
+        // console.log(path);
+        // 按"/"分割路径
+        var pathArr = path.split("/");
+        // result
+        var index = pathArr.indexOf("result");
+        // 获取认证ID
+        var accreditationId = pathArr[index + 1];
+        // console.log(result);
+        document.getElementById("id").innerText = accreditationId;
+
+        // 发送请求
+        fetch('/api/result/' + accreditationId)
+            .then(function
+            (response) {
+                return response.json();
+            })
+            .then(function
+            (data) {
+                console.log(data);
+                document.getElementById("name").innerText = data.name;
+                document.getElementById("idcard").innerText = data.idcard;
+                document.getElementById("result").innerText = data.description;
+                document.getElementById("time").innerText = data.time;
+            })
+            .catch(function
+            (err) {
+                console.log(err);
+            });
+
+        // 禁用右键
+        document.addEventListener('contextmenu', function
+        (e) {
+            e.preventDefault();
+        });
+        // 禁用全部键盘操作
+        document.onkeydown = function
+        (e) {
+            if (e.keyCode === 123) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+                return false;
+            }
+        };
+        // 禁用选择
+        document.onselectstart = function
+        (e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            } else {
+                window.event.returnValue = false;
+            }
+            return false;
+        };
+        // 禁用复制,剪切,粘贴
+        document.oncopy = function
+        (e) {
+            e.preventDefault();
+        };
+        document.oncut = function
+        (e) {
+            e.preventDefault();
+        };
+        document.onpaste = function
+        (e) {
+            e.preventDefault();
+        };
+        // 禁用拖放
+        document.ondragstart = function
+        (e) {
+            e.preventDefault();
+        };
+        document.ondragover = function
+        (e) {
+            e.preventDefault();
+        };
+        document.ondrop = function
+        (e) {
+            e.preventDefault();
+        };
+    </script>
+</body>
+</html>

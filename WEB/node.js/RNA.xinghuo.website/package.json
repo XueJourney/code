@@ -4,11 +4,17 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "nodemon app.js"
+    "test": "nodemon app.js",
+    "start": "node app.js"
   },
   "author": "Xue Zhongze",
   "license": "GPL-3.0",
   "dependencies": {
-    "nodemon": "^3.0.2"
+    "axios": "^1.6.5",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "fs": "^0.0.1-security",
+    "nodemon": "^3.0.2",
+    "public-ip": "^6.0.1"
   }
 }

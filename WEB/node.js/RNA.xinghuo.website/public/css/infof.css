@@ -1,0 +1,49 @@
+.infof{
+    /* 向下移动50px */
+    margin-top: 8%;
+}
+
+.infof button{
+    /* 设置按钮的宽度和高度 */
+    width: 200px;
+    height: 40px;
+    /* 设置按钮的圆角 */
+    border-radius: 5px;
+    /* 设置按钮的左右内边距 */
+    padding: 0 10px;
+    /* 设置按钮的上下内边距 */
+    margin: 10px 0;
+    /* 设置按钮的字体大小 */
+    font-size: 14px;
+    /* 设置按钮的字体颜色 */
+    color: #fff;
+    /* 设置按钮的背景颜色 */
+    background-color: #007bff;
+    /* 设置按钮的鼠标悬停效果 */
+    cursor: pointer;
+    /* 设置无边框 */
+    border: none;
+    /* 设置按钮的鼠标按下效果(颜色渐变) */
+    -webkit-transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+}
+
+.infof input{
+    /* 设置输入框的宽度和高度 */
+    width: 200px;
+    height: 30px;
+    /* 设置输入框的边框样式 */
+    border: 1px solid #ccc;
+    /* 设置输入框的圆角 */
+    border-radius: 5px;
+    /* 设置输入框的左右内边距 */
+    padding: 0 10px;
+    /* 设置输入框的上下内边距 */
+    margin: 10px 0;
+    /* 设置输入框的字体大小 */
+    font-size: 14px;
+    /* 设置输入框的字体颜色 */
+    color: #333;
+    /* 设置输入框的背景颜色 */
+    background-color: #fff;
+}

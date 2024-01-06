@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>加载页</title>
+    <!-- 引入css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            min-height: 30vh; /* 最小高度为视口的高度 */
+            background-color: #f0f0f0;
+        }
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px; /* 圆圈宽度为视口宽度的30% */
+            height: 50px; /* 圆圈高度为视口宽度的30% */
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+    <p><strong>加载中...</strong></p>
+    <script>
+        const loader = document.querySelector('.loader');
+        let hue = 0;
+
+        setInterval(() => {
+            hue += 2;
+            loader.style.borderColor = `hsl(${hue}, 60%, 60%) transparent transparent transparent`;
+        }, 50);
+        document.addEventListener('DOMContentLoaded', function() {
+            // 生成5到8秒之间的随机时间
+            var randomTime = Math.floor(Math.random() * (8000 - 5000 + 1)) + 5000;
+
+            // 设置计时器，在随机时间后跳转
+            setTimeout(function() {
+                window.location.href = '/home';
+            }, randomTime);
+        });
+    </script>
+</body>
+</html>

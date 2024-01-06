@@ -1,0 +1,32 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex; /* 使用Flexbox居中内容 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    background-color: #000; /* 初始背景色，会被JS随机更改 */
+    transition: background-color 1s; /* 背景色变化过渡效果 */
+}
+
+.loader {
+    border: 8px solid transparent; /* 设置边框，但其他三边透明 */
+    border-top: 8px solid #3498db; /* 顶部边框颜色，会被JS随机更改 */
+    border-radius: 50%; /* 圆形边框 */
+    width: 100px; /* 加载图标宽度 */
+    height: 100px; /* 加载图标高度 */
+    animation: spin 2s linear infinite; /* 无限旋转动画 */
+    position: absolute; /* 使用绝对定位 */
+    top: 50%; /* 相对于父元素50%的位置，与left配合实现完全居中 */
+    left: 50%;
+    transform: translate(-50%, -50%); /* 调整位置以确保加载图标完全居中 */
+}
+
+/* 定义旋转动画 */
+@keyframes spin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
