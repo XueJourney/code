@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="http://154.12.26.52:7008/script.js" data-website-id="2b2355ae-e8b4-46d9-a8a1-aadb15974606"></script>
+    <title>信息获取</title>
+</head>
+<body>
+    <div class="info">
+        <h1>信息获取</h1>
+        <p>请输入你要获取的音乐信息</p>
+        <!-- 表单 -->
+        <form>
+            <input type="text" name="music_name" placeholder="请输入音乐名称">
+            <!-- 禁用输入框 -->
+            <input type="text" name="singer" placeholder="请输入歌手(选填) 开发中,不可用"disabled>
+            <input type="text" name="key" placeholder="请输入你购买的密钥">
+            <br>
+            <button type="submit">提交</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // 阻止表单默认提交行为
+                const musicName = form.music_name.value.trim();
+                const singer = form.singer.value.trim() || 'all';
+                const key = form.key.value.trim();
+                // 检查音乐名称和密钥是否为空
+                if (!musicName || !key) {
+                    alert('音乐名称和密钥不能为空');
+                    return;
+                }
+                // 构建请求数据
+                const data = { music_name: musicName, singer: singer, key: key };
+                console.log(data);
+                // 发送POST请求
+                fetch('/api/music_info', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ms === 'success') {
+                        alert('请求成功,正在跳转,请等待10s\nID: '+data.id);
+                        // 等待10s
+                        setTimeout(function() {
+                            // 跳转到音乐详情页
+                            window.location.href = `/music?id=${data.id}`;
+                        }, 10000);
+                    } else if (data.ms === 'error_key') {
+                        alert('密钥错误\n错误ID: '+data.id);
+                    } else {
+                        alert('未知错误，请前往 https://txc.qq.com/products/621793 反馈\n错误ID: '+data.id);
+                    }
+                })
+                .catch(error => {
+                    console.error('请求失败:', error);
+                    alert('请求失败，请检查网络连接');
+                });
+            });
+        });
+    </script>
+
+    <style>
+        @font-face{
+            font-family: 'Square_regular_script';
+            src : url('https://static.xinghuo.website/get/./TTF/Square_regular_script.ttf');
+        }
+        body{
+            background-color: #f2f2f2;
+            font-family: 'Square_regular_script';
+        }
+        .info {
+            text-align: center;
+            margin-top: 100px;
+            /* 蒙版 */
+            background-color: rgba(117, 117, 117, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* 表单美化 */
+        /* 输入美化 */
+        input {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+        /* 焦点 */
+        input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+        /* 鼠标碰到 */
+        input:hover {
+            border-color: #0056b3;
+        }
+        /* 按钮美化 */
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</body>
+</html>

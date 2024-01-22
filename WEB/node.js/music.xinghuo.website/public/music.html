@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="http://154.12.26.52:7008/script.js" data-website-id="2b2355ae-e8b4-46d9-a8a1-aadb15974606"></script>
+    <title>搜索结果</title>
+</head>
+<body>
+    <div class="info">
+        <h1>搜索结果</h1>
+        <!-- 搜索信息 -->
+        <p><div id="SI" class="SI"></div></p>
+        <!-- 表格 -->
+        <table id="table" class="table">
+            <tr>
+                <th>歌曲名称</th>
+                <th>歌手</th>
+                <th>播放链接</th>
+                <!-- <th>下载链接</th> -->
+            </tr>
+            <!-- 搜索结果将添加在这里 -->
+        </table>
+        <!-- 剩余搜索次数 -->
+        <p><div id="NOS" class="NOS"></div></p>
+    </div>
+    <style>
+        @font-face{
+            font-family: 'Square_regular_script';
+            src : url('https://static.xinghuo.website/get/./TTF/Square_regular_script.ttf');
+        }
+        body{
+            background-color: #f2f2f2;
+            font-family: 'Square_regular_script';
+        }
+        .info {
+            /* 底层蒙版 */
+            background-color: rgba(102, 111, 129, 0.5);
+            /* 文字居中 */
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px; /* 圆角 */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* 阴影效果 */
+            color: #333;
+            width: 500px;
+        }
+        h1{
+            /* 居中 */
+            text-align: center;
+        }
+        .SI {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        table{
+            /* 每项间距 */
+            border-spacing: 15px 5px;
+        }
+        .NOS {
+            /* 居中 */
+            text-align: center;
+            /* 浅黑 */
+            color: #333;
+        }
+    </style>
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var id = urlParams.get('id');
+
+        fetch('/api/id/?id=' + id).then(response => response.json())
+            .then(data => {
+                var key = data[0]["key"];
+                var songName = data[1];
+                var singer = data[2];
+                var requestResult = data[3]["result"];
+
+                document.getElementById("SI").innerHTML = "搜索歌曲名称:"+songName+"\n搜索歌手名称:"+singer;
+                document.getElementById("NOS").innerHTML = "密钥名称:"+key[0]+"  剩余次数:"+key[1];
+
+                var result = requestResult["songs"];
+                var table = document.getElementById("table");
+
+                for (var i = 0; i < result.length; i++) {
+                    let song = result[i]["name"];
+                    let songId = result[i]["id"];
+                    let songSingers = result[i]["artists"].map(artist => artist.name).join(", ");
+
+                    fetch('http://music.api.xinghuo.website/song/url/v1?id=' + songId + `&level=lossless`)
+                        .then(response => response.json())
+                        .then(data => {
+                            let songUrl = data["data"][0]["url"];
+
+                            var row = table.insertRow();
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                            // var cell4 = row.insertCell(3);
+
+                            cell1.innerHTML = song;
+                            cell2.innerHTML = songSingers;
+                            cell3.innerHTML = "<a href='" + songUrl + "'>播放</a>";
+                            // 下载链接
+                            // cell4.innerHTML = "<a download='"+ song +"' ' href='" + songUrl + "'>下载链接</a>";
+                        });
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    </script>
+</body>
+</html>

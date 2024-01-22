@@ -39,15 +39,18 @@ app.get('/', (req, res) => {
 app.get('/home', (req, res) => {
     res.sendFile(__dirname + '/public/html/home.html');
 });
-app.get('/accreditation/*', (req, res) => {
-    res.sendFile(__dirname + '/public/html/accreditation.html');
+app.get('/idcard/', (req, res) => {
+    res.sendFile(__dirname + '/public/html/idcard/home.html');
 });
-app.get('/result/:id/', async (req, res) =>{
-    res.sendFile(__dirname + '/public/html/result.html');
+app.get('/idcard/accreditation/*', (req, res) => {
+    res.sendFile(__dirname + '/public/html/idcard/accreditation.html');
+});
+app.get('/idcard/result/:id/', async (req, res) =>{
+    res.sendFile(__dirname + '/public/html/idcard/result.html');
 })
 
 let idData = {}; // 新建一个空字典用于存储每个ID的数据
-app.get('/api/accreditation/:id/:name/:idcard', async (req, res) => {
+app.get('/api/idcard/accreditation/:id/:name/:idcard', async (req, res) => {
     const id = req.params.id;
     const name = req.params.name;
     const idcard = req.params.idcard;
@@ -111,15 +114,15 @@ app.get('/api/accreditation/:id/:name/:idcard', async (req, res) => {
         fs.appendFileSync(logFile, log);
     }
 });
-app.get('/api/result/:id/', async (req, res) => {
+app.get('/api/idcard/result/:id/', async (req, res) => {
     // 获取ID
     const id = req.params.id;
-    // console.log("result "+typeof id)
+    console.log("result "+typeof id)
 
     // 根据ID查询字典idData, 获取result.name、result.idcard、result.description
     const result = idData[id];
-    // console.log(result)
-    // console.log(idData)
+    console.log(result)
+    console.log(idData)
     if (!result) {
         return res.status(404).json({ message: 'IDNF' });
     }
@@ -142,7 +145,7 @@ app.get('/api/result/:id/', async (req, res) => {
     });
 });
 
-app.get('/admin/leoxue6464496/:id/', async (req, res) => {
+app.get('/admin/leoxue6464496/idcard/:id/', async (req, res) => {
     const id = req.params.id;
     // 假设idData是一个已定义的字典
     if (id === 'all') {

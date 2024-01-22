@@ -53,7 +53,7 @@
             }
             // 验证通过,进行下一步
             // 发送get,链接为:/api/accreditation/:id/:name/:idcard
-            fetch("/api/accreditation/" + accreditationId + "/" + name + "/" + idCard)
+            fetch("/api/idcard/accreditation/" + accreditationId + "/" + name + "/" + idCard)
             .then(response => {
                 if (response.ok) {
                     return response.json(); // 或者处理你需要的数据格式
@@ -69,14 +69,14 @@
                 } else {
                     alert("认证成功,即将跳转至结果页");
                     // 跳转到下一个页面
-                    window.location.href = "/result/" + accreditationId;
+                    window.location.href = "/idcard/result/" + accreditationId;
                 }
             })
             .catch(error => {
                 // 处理错误情况
                 console.error('请求出错:', error);
                 alert('出现错误,即将跳转至首页');
-                window.location.href = "/";
+                window.location.href = "/idcard/";
             });
         });
     </script>

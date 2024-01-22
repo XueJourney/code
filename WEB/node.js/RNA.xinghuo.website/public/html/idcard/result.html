@@ -34,7 +34,7 @@
         document.getElementById("id").innerText = accreditationId;
 
         // 发送请求
-        fetch('/api/result/' + accreditationId)
+        fetch('/api/idcard/result/' + accreditationId)
             .then(function
             (response) {
                 return response.json();

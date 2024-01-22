@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="http://154.12.26.52:7008/script.js" data-website-id="2b2355ae-e8b4-46d9-a8a1-aadb15974606"></script>
+    <title>引导页</title>
+</head>
+<body>
+    <div class="info">
+        <h1>引导页</h1>
+        <p>感谢您使用XueJourney音乐</p>
+        <P>本项目并非公益项目,没有试听功能,请先购买使用密钥!</P>
+        <P>购买链接:<a href="https://afdian.net/item/a635528cb8ce11ee872552540025c377">点击跳转</a></P>
+        <p>若您已购买兑换码,请点击以下按钮跳转功能页面</p>
+        <button onclick="window.location.href='/home'">进入XueJourney音乐</button>
+        <p>若您未购买,请点击以下按钮跳转购买页面</p>
+        <button onclick="window.location.href='https://afdian.net/item/a635528cb8ce11ee872552540025c377'">购买兑换码</button>
+    </div>
+    <style>
+        @font-face{
+            font-family: 'Square_regular_script';
+            src : url('https://static.xinghuo.website/get/./TTF/Square_regular_script.ttf');
+        }
+        body{
+            background-color: #f2f2f2;
+            font-family: 'Square_regular_script';
+        }
+        .info{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            /* 蒙版 */
+            background-color: rgba(128, 128, 128, 0.349);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 20px;
+            /* 圆角 */
+            border-radius: 10px;
+            /* 边框 */
+            border: none;
+            width: 500px;
+        }
+        button{
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4c5eaf;
+            /* 圆角 */
+            border-radius: 5px;
+            /* 边框 */
+            border: none;
+            /* 文字颜色 */
+            color: white;
+            /* 鼠标悬停效果 */
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+            /* 过渡效果 */
+            transition: background-color 0.3s ease;
+        }
+        button:hover{
+            background-color: #3b4893;
+        }
+        a {
+            color: #4c5eaf;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #3b4893;
+            text-decoration: underline;
+        }
+    </style>
+</body>
+</html>
